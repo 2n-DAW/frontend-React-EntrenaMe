@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Sport } from '../shared/interfaces/Sport.interface';
+import { SportService } from '../services/sport.service';
 
 interface SportsContextProps {
     sports: Sport[];
@@ -12,17 +13,13 @@ export const SportsProvider = ({ children }: { children: ReactNode }) => {
     const [sports, setSports] = useState<Sport[]>([]);
 
     useEffect(() => {
-        // const fetchSports = async () => {
-        //     const response = await fetch('/api/sports');
-        //     const data = await response.json();
-        //     setSports(data);
-        // };
-
-        // fetchSports();
-        
-        
-        
-        
+        const fetchSports = async () => {
+            const resp = await SportService.getAll();
+            if (!resp) return;
+            setSports(resp.sports);
+        };
+    
+        fetchSports();
     }, []);
 
     return (
@@ -33,7 +30,7 @@ export const SportsProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useSports = () => {
-    const context = useContext(SportsContext);
+    const context= useContext(SportsContext);
     if (!context) {
         throw new Error('No se puede usar el contexto fuera de su proveedor');
     }

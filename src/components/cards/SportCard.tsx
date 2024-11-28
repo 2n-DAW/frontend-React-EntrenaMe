@@ -1,7 +1,8 @@
 import { Sport } from "../../shared/interfaces/Sport.interface";
 
-const SportCard = ( sport : Sport ) => {
-    const { img_sport, n_sport } = sport;
+const SportCard = ( props : {data:Sport}) => {
+    
+    const { img_sport, n_sport } = props.data as Sport;
 
     return (
         <div className="relative group">
