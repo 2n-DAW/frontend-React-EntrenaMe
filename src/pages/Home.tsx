@@ -1,5 +1,4 @@
-
-function Home() {
+const Home = () => {
     return (
         <div>
             <p>Home</p>
