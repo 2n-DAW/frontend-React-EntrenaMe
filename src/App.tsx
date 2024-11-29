@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { SportsProvider } from './contexts/SportsContext';
+const Home = React.lazy(() => import('./pages/Home'));
+const Header = React.lazy(() => import('./components/layout/Header'));
+const Footer = React.lazy(() => import('./components/layout/Footer'));
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="bg-background1 text-text1 flex flex-col min-h-screen">
+      <Suspense fallback={<>Cargando</>} >
+      <SportsProvider>
+        <BrowserRouter>
+          <Header />
+          <div className="w-full mx-auto flex-grow py-10">
+            <Routes>
+              <>
+                <Route path="/" element={<Home />} />
+              </>
+            </Routes>
+          </div>
+          <Footer />
+        </BrowserRouter>
+        </SportsProvider>
+      </Suspense>
+    </div>
+  );
 }
 
-export default App
+export default App;
