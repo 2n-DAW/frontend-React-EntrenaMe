@@ -8,3 +8,8 @@ export interface Sport {
 export interface Sports {
     sports: Array<Sport>;
 }
+
+export interface SportsContextProps {
+    sports: Sport[];
+    setSports: React.Dispatch<React.SetStateAction<Sport[]>>;
+}

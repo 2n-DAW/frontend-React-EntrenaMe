@@ -1,21 +1,29 @@
-import { useSports } from "../../contexts/SportsContext";
+import { Sports } from "../../shared/interfaces/Sport.interface";
 import SportCard from "../cards/SportCard";
 
-const SportList = () => {
-    const { sports } = useSports();
-    return (
-        <>
-            <section className="sport_list p-4">
-                <h2 className="text-2xl font-bold text-deep-orange-600 mb-4">Deportes</h2>
+export default function SportsList ({ sports }: Sports) {
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                    {sports.map((sport) => (
-                        <SportCard key={sport.id_sport} data={sport} />
-                    ))}
-                </div>
-            </section>
-        </>
-    );
+    return  (
+        <div className="min-h-[77vh] overflow-x-auto p-8">
+            <h1 className="text-3xl font-bold mb-4">Lista de deportes</h1>
+            <table className="w-full border-2 border-gray-300">
+                <thead className="bg-teal-400 uppercase">
+                    <tr>
+                        <th className="border-2 border-gray-300 p-2">ID</th>
+                        <th className="border-2 border-gray-300 p-2">Nombre</th>
+                        <th className="border-2 border-gray-300 p-2">Imagen</th>
+                        <th className="border-2 border-gray-300 p-2">Slug</th>
+                        <th className="border-2 border-gray-300 p-2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody className="tbody_sports_list">
+                    {
+                        sports.map(sport => (
+                            <SportCard key={sport.id_sport} data={sport}/>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </div>
+    )
 }
-
-export default SportList;
