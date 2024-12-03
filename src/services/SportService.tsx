@@ -7,10 +7,6 @@ const SportService = {
         return api().get("/sports");
     },
 
-    getOneSport(slug: string): Promise<ApiResponse<Sport>> {
-        return api().get(`sports/slug/${slug}`);
-    },
-
     createSport(data: Sport): Promise<ApiResponse<Sport>> {
         return api().post("/sports", { data });
     },

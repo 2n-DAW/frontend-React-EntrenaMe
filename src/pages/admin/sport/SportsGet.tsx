@@ -3,10 +3,10 @@ import { useSports } from "../../../hooks/useSports";
 import SportsList from "../../../components/admin/sport/SportsList";
 
 const SportsGet = () => {
-    const {sports} = useSports();
+    const {sports, useDeleteSport} = useSports();
 
     return (
-        <SportsList sports={sports}/>
+        <SportsList sports={sports} deleteSport={useDeleteSport}/>
     )
 }
 

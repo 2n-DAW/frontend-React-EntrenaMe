@@ -1,5 +1,8 @@
-import {useContext, useCallback, useEffect, useState} from 'react';
+import {useContext, useCallback, useState} from 'react';
+import SportService from '../services/SportService';
 import SportsContext from "../context/SportsContext";
+// import { Sport } from '../interfaces';
+import { toast } from 'react-toastify';
 
 export function useSports() {
     const context = useContext(SportsContext);
@@ -12,5 +15,16 @@ export function useSports() {
 
     const { sports, setSports } = context;
 
-    return { sports, setSports };
+    const useDeleteSport = (id: number) => {
+        SportService.deleteSport(id)
+            .then(({ data, status }) => {
+                if (status === 200) {
+                    toast.success(data);
+                    setSports(sports.filter(sport => sport.id_sport !== id));
+                }
+            })
+            .catch(e => console.error(e));
+    }
+
+    return { sports, setSports, useDeleteSport };
 }
