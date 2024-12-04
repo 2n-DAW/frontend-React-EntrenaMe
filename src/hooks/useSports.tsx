@@ -1,7 +1,7 @@
 import {useContext, useCallback, useState} from 'react';
 import SportService from '../services/SportService';
-import SportsContext from "../context/SportsContext";
-import { ApiResponse, Sport, SportContextType } from '../interfaces';
+import SportsContext from "../contexts/SportsContext";
+import { ApiResponse, Sport, SportContextType } from '../shared/interfaces';
 // import { toast } from 'react-toastify';
 
 export function useSports() {

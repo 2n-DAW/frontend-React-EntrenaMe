@@ -1,5 +1,5 @@
-import api from './Api';
-import { ApiResponse, Sport } from '../interfaces';
+import api from '../core/api.service';
+import { ApiResponse, Sport } from '../shared/interfaces';
 
 const SportService = {
     getAllSports(): Promise<ApiResponse<Sport[]>> {

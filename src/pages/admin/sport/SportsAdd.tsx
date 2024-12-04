@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import SportsForm from "../../../components/admin/sport/SportsForm";
+import SportsForm from "../../../components/form/SportsForm";
 import { useSports } from "../../../hooks/useSports";
 import { useNavigate } from "react-router-dom";
-import { Sport } from "../../../interfaces";
+import { Sport } from "../../../shared/interfaces";
 
 const SportsAdd = () => {
     const { isCorrect, useAddSport } = useSports();

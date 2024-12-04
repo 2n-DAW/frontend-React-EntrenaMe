@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { SportContextProvider } from './context/SportsContext';
-import Navbar from "./components/admin/Navbar";
+import { SportContextProvider } from './contexts/SportsContext';
+import Navbar from "./components/layout/Navbar";
 
 const Dashboard = React.lazy(() => import( "./pages/admin/Dashboard"));
 const SportsGet = React.lazy(() => import('./pages/admin/sport/SportsGet'));

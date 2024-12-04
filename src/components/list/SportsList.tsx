@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { Sport } from '../../../interfaces';
-import SportsCard from './SportsCard';
+import { Sport } from '../../shared/interfaces';
+import SportsCard from '../cards/SportsCard';
 
 export default function SportsList ({ sports, deleteSport }: { sports: Sport[], deleteSport: (id: number) => void }) {
 

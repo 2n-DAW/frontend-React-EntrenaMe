@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import SportsForm from "../../../components/admin/sport/SportsForm";
+import SportsForm from "../../../components/form/SportsForm";
 import { useSports } from "../../../hooks/useSports";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Sport } from "../../../interfaces";
+import { Sport } from "../../../shared/interfaces";
 
 const SportsUpdate = () => {
     const { slug } = useParams<{ slug: string }>();

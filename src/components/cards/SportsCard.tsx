@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { Sport } from '../../../interfaces';
+import { Sport } from '../../shared/interfaces';
 
 export default function SportsCard ({ sport, deleteSport }: { sport: Sport, deleteSport: (id: number) => void }) {
     const navigate = useNavigate();
