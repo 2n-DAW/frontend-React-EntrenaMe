@@ -5,7 +5,7 @@ import { Sport, SportContextType, SportContextProviderProps } from '../interface
 const Context = React.createContext<SportContextType | undefined>(undefined)
 
 export function SportContextProvider({ children }: SportContextProviderProps) {
-    const [sports, setSports] = useState<Sport[]>([]);
+    const [sports, setSports] = useState<Sport[]>([] as Sport[]);
 
     useEffect(() => {
         SportService.getAllSports()
