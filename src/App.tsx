@@ -1,12 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import './App.css';
 
 import { SportContextProvider } from './context/SportsContext';
 import Navbar from "./components/admin/Navbar";
 
 const Dashboard = React.lazy(() => import( "./pages/admin/Dashboard"));
 const SportsGet = React.lazy(() => import('./pages/admin/sport/SportsGet'));
+const SportsAdd = React.lazy(() => import('./pages/admin/sport/SportsAdd'));
+const SportsUpdate = React.lazy(() => import('./pages/admin/sport/SportsUpdate'));
 
 function App() {
     return (
@@ -18,6 +19,8 @@ function App() {
                         <Routes>
                             <Route path="/dashboard" element={<Dashboard />} />
                             <Route path="/dashboard/sports" element={<SportsGet/>}/>
+                            <Route path="/dashboard/sports/add" element={<SportsAdd/>}/>
+                            <Route path="/dashboard/sports/update/:slug" element={<SportsUpdate/>}/>
                         </Routes>
                     </div>
                 </SportContextProvider>
