@@ -1,8 +1,8 @@
-import { useSports } from "../../../hooks/useSports";
+import { useSportsContext } from "../../../hooks/useSportsContext";
 import SportList from "../../../components/lists/SportList";
 
 const SportsMain = () => {
-    const {sports} = useSports();
+    const {sports} = useSportsContext();
 
     return (
         <SportList sports={sports}/>

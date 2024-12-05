@@ -1,37 +1,14 @@
-import { useEffect, useState } from "react";
+
 import { ISportsFormProps } from "../../shared/interfaces/hooksInterfaces/SportsForm.interface";
-import { ISport } from "../../shared/interfaces/entities/Sport.interface";
+import { useSportsForm } from "../../hooks/useSportsForm";
 
 
 
-
-const SportsForm = ({ sport_data, save }: ISportsFormProps) => {
-
-    const [form_data, set_form_data] = useState<Partial<ISport>>({
-        n_sport: '',
-        img_sport: ''
-    });
-
-    useEffect(() => {
-        if (sport_data) set_form_data(sport_data);
-    },
-        [sport_data]);
-
-    const onSubmit = (e: any) => {
-        e.preventDefault();
-        save(form_data);
-    }
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        
-        set_form_data((old_data) => {
-            return {...old_data,[name]: value,}
-        });
-    };
-
+const SportsForm = ({ sport_data }: ISportsFormProps) => {
+    
+    const { form_data, onSubmit, onChange } = useSportsForm({ sport_data });
+    
     const { n_sport, img_sport } = form_data;
-
 
     return (
         <form onSubmit={onSubmit}>
@@ -43,19 +20,19 @@ const SportsForm = ({ sport_data, save }: ISportsFormProps) => {
                         name="n_sport"
                         value={n_sport}
                         onChange={onChange}
-                        required
+                        
                     />
                 </label>
             </div>
             <div>
-            <label>
+                <label>
                     Imagen
                     <input
                         type="text"
                         name="img_sport"
                         value={img_sport}
                         onChange={onChange}
-                        required
+                        
                     />
                 </label>
             </div>

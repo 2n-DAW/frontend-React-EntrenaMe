@@ -1,7 +1,7 @@
 import {useContext} from 'react';
 import { SportsContext } from '../contexts/SportsContext';
 
-export function useSports() {
+export const useSportsContext = () => {
     const context = useContext(SportsContext);
 
     if (!context) {
