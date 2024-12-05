@@ -13,7 +13,8 @@ export const SportService = {
         return ApiService.get<ISport>(`sports/slug/${slug}`);
     },
 
-    createSport(data: ISport): Promise<ISport> {
+    createSport(data: Partial<ISport>): Promise<ISport> {
+        
         return ApiService.post<ISport>('/sports', data);
     },
 

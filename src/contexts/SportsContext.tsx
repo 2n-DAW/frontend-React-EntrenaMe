@@ -22,11 +22,12 @@ export const SportsProvider = ({ children }: { children: ReactNode }) => {
         fetchSports();
     }, []);
 
-    // const createSport = async (newSport: ISport) => {
-    //     const resp = await SportService.create(newSport);
-    //     if (!resp) return;
-    //     setSports((prevSports) => [...prevSports, resp.sport]);
-    // };
+    const createSport = async (sport_data: ISport) => {
+        const sport = await SportService.createSport(sport_data);
+        console.log("Create sport resp",sport);
+        if (!sport) return;
+        setSports(prev_sports => [...prev_sports, sport]);
+    };
 
     // const updateSport = async (updatedSport: ISport) => {
     //     const resp = await SportService.update(updatedSport);
@@ -38,7 +39,7 @@ export const SportsProvider = ({ children }: { children: ReactNode }) => {
     // };
 
     return (
-        <SportsContext.Provider value={{ sports, setSports, }}>
+        <SportsContext.Provider value={{ sports, setSports, createSport}}>
             {children}
         </SportsContext.Provider>
     );

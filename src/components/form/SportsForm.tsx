@@ -11,11 +11,12 @@ const SportsForm = ({ sport_data }: ISportsFormProps) => {
     const { n_sport, img_sport } = form_data;
 
     return (
-        <form onSubmit={onSubmit}>
-            <div>
+        <form onSubmit={onSubmit} >
+            <div >
                 <label>
                     Nombre
                     <input
+                    style={{ color: 'black' }}
                         type="text"
                         name="n_sport"
                         value={n_sport}
@@ -28,6 +29,7 @@ const SportsForm = ({ sport_data }: ISportsFormProps) => {
                 <label>
                     Imagen
                     <input
+                    style={{ color: 'black' }}
                         type="text"
                         name="img_sport"
                         value={img_sport}
