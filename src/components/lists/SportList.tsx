@@ -1,7 +1,7 @@
-import { Sports } from "../../shared/interfaces/Sport.interface";
+import { ISports } from "../../shared/interfaces/entities/Sport.interface";
 import SportCard from "../cards/SportCard";
 
-export default function SportsList ({ sports }: Sports) {
+export default function SportsList ({ sports }: ISports) {
 
     return  (
         <div className="min-h-[77vh] overflow-x-auto p-8">

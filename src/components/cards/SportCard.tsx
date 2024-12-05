@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { Sport } from "../../shared/interfaces/Sport.interface";
+import { ISport } from "../../shared/interfaces/entities/Sport.interface";
 
-const SportCard = ({data, deleteSport}: {data:Sport, deleteSport: (id: number) => void} ) => {
+const SportCard = ({data, deleteSport}: {data:ISport, deleteSport: (id: number) => void} ) => {
 
     const navigate = useNavigate();
     

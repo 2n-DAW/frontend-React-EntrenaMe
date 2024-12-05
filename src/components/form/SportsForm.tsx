@@ -1,71 +1,68 @@
-import React, { useEffect } from "react";
-import { useForm } from 'react-hook-form';
-import { useNavigate } from "react-router-dom";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-import { Sport } from "../../shared/interfaces/Sport.interface";
+import { useEffect, useState } from "react";
+import { ISportsFormProps } from "../../shared/interfaces/hooksInterfaces/SportsForm.interface";
+import { ISport } from "../../shared/interfaces/entities/Sport.interface";
 
-const SportsForm = ({ sport= { id_sport: 0, n_sport: '', img_sport: '', slug_sport:'' }, form_type, sendData }: { sport?: Sport, form_type: string, sendData: (data: Partial<Sport>) => void }) => {
-    const navigate = useNavigate();
 
-    const validators = Yup.object().shape({
-        n_sport: Yup.string()
-            .required('*El nombre del deporte es obligatorio')
-            .min(3, '*El nombre debe tener al menos 3 caracteres')
-            .max(15, '*El nombre no puede exceder los 15 caracteres'),
-        img_sport: Yup.string()
-            .required('*La imagen del deporte es obligatoria'),
-    }); 
 
-    const {register, handleSubmit, setValue, formState: {errors} } = useForm({resolver: yupResolver(validators)});
-    
+
+const SportsForm = ({ sport_data, save }: ISportsFormProps) => {
+
+    const [form_data, set_form_data] = useState<Partial<ISport>>({
+        n_sport: '',
+        img_sport: ''
+    });
+
     useEffect(() => {
-        if (sport.slug_sport !== '') {
-            setValue('n_sport', sport.n_sport);
-            setValue('img_sport', sport.img_sport);
-        }
-    }, [sport]);
+        if (sport_data) set_form_data(sport_data);
+    },
+        [sport_data]);
 
-    const send_data = (data: Partial<Sport>) => {
-        sport.id_sport !== 0 ? sendData({ ...data, id_sport: sport.id_sport}) : sendData(data);
+    const onSubmit = (e: any) => {
+        e.preventDefault();
+        save(form_data);
+    }
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        
+        set_form_data((old_data) => {
+            return {...old_data,[name]: value,}
+        });
     };
 
-    const redirects = {
-        sports: () => navigate('/dashboard/sports')
-    };
+    const { n_sport, img_sport } = form_data;
 
-    const button_type = form_type == 'create' ? 'Añadir' : 'Actualizar';
 
     return (
-        <form className='flex flex-col space-y-4 w-full max-w-lg' onSubmit={handleSubmit(send_data)}>
-            <div className='flex flex-col'>
-                <label htmlFor="n_sport" className='text-md mb-2'>Nombre:</label>
-                <input type="text" id="n_sport" {...register('n_sport')} className="border border-gray-300 p-2 rounded"/>
-                <span className="text-red-500 text-xs italic mt-1">{errors.n_sport?.message}</span>
+        <form onSubmit={onSubmit}>
+            <div>
+                <label>
+                    Nombre
+                    <input
+                        type="text"
+                        name="n_sport"
+                        value={n_sport}
+                        onChange={onChange}
+                        required
+                    />
+                </label>
             </div>
-
-            <div className='flex flex-col'>
-                <label htmlFor="img_sport" className='text-md mb-2'>Imagen:</label>
-                <input type="text" id="img_sport" {...register('img_sport')} className="border border-gray-300 p-2 rounded"/>
-                <span className="text-red-500 text-xs italic mt-1">{errors.img_sport?.message}</span>
+            <div>
+            <label>
+                    Imagen
+                    <input
+                        type="text"
+                        name="img_sport"
+                        value={img_sport}
+                        onChange={onChange}
+                        required
+                    />
+                </label>
             </div>
-
-            <div className='flex justify-start space-x-4 mt-4'>
-                <button
-                    type="submit"
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded">
-                    {button_type}
-                </button>
-
-                <button
-                    type="button"
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-5 rounded"
-                    onClick={() => redirects.sports()}>
-                    Cancelar
-                </button>
-            </div>
+            <button type="submit">{sport_data ? 'Modificar' : 'Crear'}</button>
         </form>
-    )
+    );
+
 }
 
 export default SportsForm;

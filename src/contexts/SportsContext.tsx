@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import { Sport, SportsContextProps } from '../shared/interfaces/Sport.interface';
+import { Sport, SportsContextProps } from '../shared/interfaces/entities/Sport.interface';
 import { SportService } from '../services/sport.service';
 
 
