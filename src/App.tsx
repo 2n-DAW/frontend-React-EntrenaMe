@@ -4,6 +4,8 @@ import { SportsProvider } from './contexts/SportsContext';
 import Navbar from './components/layout/Navbar';
 const Home = React.lazy(() => import('./pages/admin/Home'));
 const SportsMain = React.lazy(() => import('./pages/admin/sport/SportsMain'));
+const SportsCreate = React.lazy(() => import('./pages/admin/sport/SportsCreate'));
+
 
 function App() {
 
@@ -18,6 +20,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/sports" element={<SportsMain />} />
+                  <Route path="/sports/create" element={<SportsCreate/>}/>
                 </Routes>
               </div>
             </div>

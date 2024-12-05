@@ -1,11 +1,12 @@
-import { useContext } from "react";
-import { SportsContext } from "../contexts/SportsContext";
+import {useContext} from 'react';
+import { SportsContext } from '../contexts/SportsContext';
 
-export const useSports = () => {
+export function useSports() {
     const context = useContext(SportsContext);
+
     if (!context) {
-        throw new Error('No se puede usar el contexto fuera de su proveedor');
+        throw new Error('useSports debe ser usado dentro de un SportsContextProvider');
     }
-    
+
     return context;
-};
+}
