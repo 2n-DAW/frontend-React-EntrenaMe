@@ -22,7 +22,7 @@ export const SportsProvider = ({ children }: { children: ReactNode }) => {
         fetchSports();
     }, []);
 
-    const createSport = async (sport_data: ISport) => {
+    const createSport = async (sport_data: Partial<ISport>) => {
         const sport = await SportService.createSport(sport_data);
         console.log("Create sport resp",sport);
         if (!sport) return;

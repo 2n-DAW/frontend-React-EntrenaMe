@@ -7,6 +7,8 @@ export const useSportsContext = () => {
     if (!context) {
         throw new Error('useSports debe ser usado dentro de un SportsContextProvider');
     }
+    
+    const { sports, setSports, createSport} = context;
 
-    return context;
+    return { sports, setSports, createSport};
 }
