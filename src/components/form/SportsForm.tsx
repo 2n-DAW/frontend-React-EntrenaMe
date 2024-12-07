@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import InputForm from "../inputs/InputForm";
 import { ISportsFormProps } from "../../shared/interfaces/hooksInterfaces/SportsForm.interface";
+import { useSportsContext } from "../../hooks/useSportsContext";
 
 interface SportsFormFields {
     n_sport: string;
@@ -24,6 +25,9 @@ const schema = yup.object().shape({
 });
 
 const SportsForm = ({ sport_data }: ISportsFormProps) => {
+    
+    const {createSport} = useSportsContext();
+    
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             n_sport: sport_data?.n_sport || "",
@@ -32,8 +36,8 @@ const SportsForm = ({ sport_data }: ISportsFormProps) => {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = handleSubmit((data) => {
-        console.log(data);
+    const onSubmit = handleSubmit((data:SportsFormFields) => {
+        !sport_data? createSport(data) : null;
     });
 
     return (
