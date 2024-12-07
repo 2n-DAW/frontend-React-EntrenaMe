@@ -1,13 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { ISport } from "../../shared/interfaces/entities/Sport.interface";
+import { useSportsContext } from "../../hooks/useSportsContext";
 
-const SportCard = ({data, deleteSport}: {data:ISport, deleteSport: (id: number) => void} ) => {
+const SportCard = ({data}: {data:ISport}) => {
 
     const navigate = useNavigate();
     
     const redirects = {
         update: (slug_sport: string) => navigate(`/sports/update/${slug_sport}`),
     }
+    
+    const {deleteSport}= useSportsContext();
 
     const { img_sport, n_sport,id_sport,slug_sport } = data;
 

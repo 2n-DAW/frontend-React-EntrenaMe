@@ -38,9 +38,16 @@ export const SportsProvider = ({ children }: { children: ReactNode }) => {
         );
         console.log("updateSport", sports);
     };
+    
+    const deleteSport = async (sport_id: number) => {
+        const sport = await SportService.deleteSport(sport_id);
+        if (!sport) return;
+        setSports((prev_sports) => prev_sports.filter((sport) => sport.id_sport !== sport_id));
+    }
+        
 
     return (
-        <SportsContext.Provider value={{ sports, setSports, createSport, updateSport}}>
+        <SportsContext.Provider value={{ sports, setSports, createSport, updateSport, deleteSport}}>
             {children}
         </SportsContext.Provider>
     );
