@@ -24,22 +24,23 @@ export const SportsProvider = ({ children }: { children: ReactNode }) => {
 
     const createSport = async (sport_data: Partial<ISport>) => {
         const sport = await SportService.createSport(sport_data);
-        console.log("Create sport resp",sport);
         if (!sport) return;
         setSports(prev_sports => [...prev_sports, sport]);
     };
 
-    // const updateSport = async (updatedSport: ISport) => {
-    //     const resp = await SportService.update(updatedSport);
-    //     if (!resp) return;
+    const updateSport = async (sport_data: Partial<ISport>) => {
+        const sport_updated = await SportService.updateSport(sport_data);
+        console.log(sport_updated);
+        if (!sport_updated) return;
 
-    //     setSports((prevSports) =>
-    //         prevSports.map((sport) => (sport.id === updatedSport.id ? resp.sport : sport))
-    //     );
-    // };
+        setSports((prev_sports) =>
+            prev_sports.map((sport) => (sport.id_sport === sport_data.id_sport ? sport_updated : sport))
+        );
+        console.log("updateSport", sports);
+    };
 
     return (
-        <SportsContext.Provider value={{ sports, setSports, createSport}}>
+        <SportsContext.Provider value={{ sports, setSports, createSport, updateSport}}>
             {children}
         </SportsContext.Provider>
     );

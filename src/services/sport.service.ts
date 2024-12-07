@@ -18,7 +18,8 @@ export const SportService = {
         return ApiService.post<ISport>('/sports', data);
     },
 
-    updateSport(data: ISport): Promise<ISport> {
+    updateSport(data: Partial<ISport>): Promise<ISport> {
+        console.log(data);
         return ApiService.put<ISport>('/sports', data );
     },
 

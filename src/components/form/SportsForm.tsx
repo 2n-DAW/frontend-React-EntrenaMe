@@ -26,7 +26,7 @@ const schema = yup.object().shape({
 
 const SportsForm = ({ sport_data }: ISportsFormProps) => {
     
-    const {createSport} = useSportsContext();
+    const {createSport, updateSport} = useSportsContext();
     
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -37,7 +37,8 @@ const SportsForm = ({ sport_data }: ISportsFormProps) => {
     });
 
     const onSubmit = handleSubmit((data:SportsFormFields) => {
-        !sport_data? createSport(data) : null;
+        console.log(data);
+        !sport_data? createSport(data) : updateSport({...sport_data,...data});
     });
 
     return (

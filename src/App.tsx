@@ -5,6 +5,7 @@ import Navbar from './components/layout/Navbar';
 const Home = React.lazy(() => import('./pages/admin/Home'));
 const SportsMain = React.lazy(() => import('./pages/admin/sport/SportsMain'));
 const SportsCreate = React.lazy(() => import('./pages/admin/sport/SportsCreate'));
+const SportsUpdate = React.lazy(() => import('./pages/admin/sport/SportsUpdate'));
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/sports" element={<SportsMain />} />
                   <Route path="/sports/create" element={<SportsCreate/>}/>
+                  <Route path="/sports/update/:slug_sport" element={<SportsUpdate/>}/>
                 </Routes>
               </div>
             </div>

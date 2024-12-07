@@ -6,7 +6,7 @@ const SportCard = ({data, deleteSport}: {data:ISport, deleteSport: (id: number) 
     const navigate = useNavigate();
     
     const redirects = {
-        update: (slug: string) => navigate(`/dashboard/sports/update/${slug}`),
+        update: (slug_sport: string) => navigate(`/sports/update/${slug_sport}`),
     }
 
     const { img_sport, n_sport,id_sport,slug_sport } = data;
