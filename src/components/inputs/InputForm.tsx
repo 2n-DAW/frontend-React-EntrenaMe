@@ -6,18 +6,17 @@ interface InputFormProps<T> {
     error?: string;
 }
 
-const InputForm = <T,>({ label, name, type, register, error }: InputFormProps<T>) => {
+const InputForm = <T,>({ label, name, type, register, error}: InputFormProps<T>) => {
     return (
-        <div>
-            <label>
+        <div className="flex flex-col">
+            <label htmlFor={name as string} className="text-text2"></label>
                 {label}
                 <input
-                    style={{ color: "black" }}
+                    id = {name as string}
+                    className={`bg-input1 text-input1_text p-2 rounded ${error ? 'border border-red-500' : ''}`}
                     type={type}
-                    {...register(name)}
-                />
-            </label>
-            {error && <span style={{ color: "red" }}>{error}</span>}
+                    {...register(name)} />
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
         </div>
     );
 };

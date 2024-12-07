@@ -4,6 +4,14 @@ import * as yup from "yup";
 import InputForm from "../inputs/InputForm";
 import { ISportsFormProps } from "../../shared/interfaces/hooksInterfaces/SportsForm.interface";
 
+interface SportsFormFields {
+    n_sport: string;
+    img_sport:string;
+}
+
+
+
+
 const schema = yup.object().shape({
     n_sport: yup
         .string()
@@ -30,20 +38,21 @@ const SportsForm = ({ sport_data }: ISportsFormProps) => {
 
     return (
         <form onSubmit={onSubmit}>
-            <InputForm
+            <InputForm<SportsFormFields>
                 label="Nombre"
                 name="n_sport"
                 type="text"
                 register={register}
                 error={errors.n_sport?.message}
             />
-            <InputForm
+            <InputForm<SportsFormFields>
                 label="Imagen"
                 name="img_sport"
                 type="text"
                 register={register}
                 error={errors.img_sport?.message}
             />
+
             <button type="submit">
                 {sport_data ? "Actualizar" : "Crear"}
             </button>
