@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import InputForm from "../inputs/InputForm";
 import { ISportsFormProps } from "../../shared/interfaces/hooksInterfaces/SportsForm.interface";
 
 const schema = yup.object().shape({
@@ -18,7 +19,7 @@ const SportsForm = ({ sport_data }: ISportsFormProps) => {
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             n_sport: sport_data?.n_sport || "",
-            img_sport: sport_data?.img_sport || "", 
+            img_sport: sport_data?.img_sport || "",
         },
         resolver: yupResolver(schema),
     });
@@ -29,32 +30,20 @@ const SportsForm = ({ sport_data }: ISportsFormProps) => {
 
     return (
         <form onSubmit={onSubmit}>
-            <div>
-                <label>
-                    Nombre
-                    <input
-                        style={{ color: "black" }}
-                        type="text"
-                        {...register("n_sport")}
-                    />
-                </label>
-                {errors.n_sport && (
-                    <span style={{ color: "red" }}>{errors.n_sport.message}</span>
-                )}
-            </div>
-            <div>
-                <label>
-                    Imagen
-                    <input
-                        style={{ color: "black" }}
-                        type="text"
-                        {...register("img_sport")}
-                    />
-                </label>
-                {errors.img_sport && (
-                    <span style={{ color: "red" }}>{errors.img_sport.message}</span>
-                )}
-            </div>
+            <InputForm
+                label="Nombre"
+                name="n_sport"
+                type="text"
+                register={register}
+                error={errors.n_sport?.message}
+            />
+            <InputForm
+                label="Imagen"
+                name="img_sport"
+                type="text"
+                register={register}
+                error={errors.img_sport?.message}
+            />
             <button type="submit">
                 {sport_data ? "Actualizar" : "Crear"}
             </button>
