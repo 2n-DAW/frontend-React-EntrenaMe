@@ -9,7 +9,7 @@ export const SportsContext = createContext<ISportsContextProps | undefined>(unde
 
 
 export const SportsProvider = ({ children }: { children: ReactNode }) => {
-    
+
     const [sports, setSports] = useState<ISport[]>([]);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export const SportsProvider = ({ children }: { children: ReactNode }) => {
             if (!resp) return;
             setSports(resp.sports);
         };
-    
+
         fetchSports();
     }, []);
 
@@ -30,24 +30,22 @@ export const SportsProvider = ({ children }: { children: ReactNode }) => {
 
     const updateSport = async (sport_data: Partial<ISport>) => {
         const sport_updated = await SportService.updateSport(sport_data);
-        console.log(sport_updated);
         if (!sport_updated) return;
 
         setSports((prev_sports) =>
             prev_sports.map((sport) => (sport.id_sport === sport_data.id_sport ? sport_updated : sport))
         );
-        console.log("updateSport", sports);
     };
-    
+
     const deleteSport = async (sport_id: number) => {
         const sport = await SportService.deleteSport(sport_id);
         if (!sport) return;
         setSports((prev_sports) => prev_sports.filter((sport) => sport.id_sport !== sport_id));
     }
-        
+
 
     return (
-        <SportsContext.Provider value={{ sports, setSports, createSport, updateSport, deleteSport}}>
+        <SportsContext.Provider value={{ sports, setSports, createSport, updateSport, deleteSport }}>
             {children}
         </SportsContext.Provider>
     );

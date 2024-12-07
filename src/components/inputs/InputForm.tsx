@@ -1,12 +1,7 @@
-interface InputFormProps<T> {
-    label: string;
-    name: keyof T;
-    type: string;
-    register: any;
-    error?: string;
-}
+import { IInputFormProps } from "../../shared/interfaces/InterfacesComponents/inputs/InputForm.interface";
 
-const InputForm = <T,>({ label, name, type, register, error}: InputFormProps<T>) => {
+
+const InputForm = <T,>({ label, name, type, register, error}: IInputFormProps<T>) => {
     return (
         <div className="flex flex-col">
             <label htmlFor={name as string} className="text-text2"></label>

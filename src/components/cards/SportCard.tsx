@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { ISport } from "../../shared/interfaces/entities/Sport.interface";
+import { ISportCardProps } from "../../shared/interfaces/InterfacesComponents/cards/sportCard.interface";
 import { useSportsContext } from "../../hooks/useSportsContext";
 
-const SportCard = ({data}: {data:ISport}) => {
+const SportCard = ({data}: ISportCardProps) => {
 
     const navigate = useNavigate();
     

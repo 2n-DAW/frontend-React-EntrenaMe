@@ -1,4 +1,4 @@
-import SportsForm from "../../../components/form/SportsForm";
+import SportsForm from "../../components/form/SportsForm";
 
 const SportsCreate = () => {
     return(

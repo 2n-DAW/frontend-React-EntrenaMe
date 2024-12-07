@@ -1,7 +1,7 @@
 import React from 'react';
-import SportsForm from "../../../components/form/SportsForm";
+import SportsForm from '../../components/form/SportsForm';
 import { useParams } from 'react-router-dom';
-import { useSportsContext } from "../../../hooks/useSportsContext";
+import { useSportsContext } from '../../hooks/useSportsContext';
 
 const SportsUpdate: React.FC = () => {
     const { slug_sport } = useParams();

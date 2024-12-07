@@ -2,16 +2,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import InputForm from "../inputs/InputForm";
-import { ISportsFormProps } from "../../shared/interfaces/hooksInterfaces/SportsForm.interface";
+import { ISportsFormFields, ISportsFormProps } from "../../shared/interfaces/InterfacesComponents/form/SportsForm.interface";
 import { useSportsContext } from "../../hooks/useSportsContext";
-
-interface SportsFormFields {
-    n_sport: string;
-    img_sport:string;
-}
-
-
-
 
 const schema = yup.object().shape({
     n_sport: yup
@@ -36,21 +28,20 @@ const SportsForm = ({ sport_data }: ISportsFormProps) => {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = handleSubmit((data:SportsFormFields) => {
-        console.log(data);
+    const onSubmit = handleSubmit((data:ISportsFormFields) => {
         !sport_data? createSport(data) : updateSport({...sport_data,...data});
     });
 
     return (
         <form onSubmit={onSubmit}>
-            <InputForm<SportsFormFields>
+            <InputForm<ISportsFormFields>
                 label="Nombre"
                 name="n_sport"
                 type="text"
                 register={register}
                 error={errors.n_sport?.message}
             />
-            <InputForm<SportsFormFields>
+            <InputForm<ISportsFormFields>
                 label="Imagen"
                 name="img_sport"
                 type="text"
