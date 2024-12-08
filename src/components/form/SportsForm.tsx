@@ -1,68 +1,59 @@
-import { useEffect, useState } from "react";
-import { ISportsFormProps } from "../../shared/interfaces/hooksInterfaces/SportsForm.interface";
-import { ISport } from "../../shared/interfaces/entities/Sport.interface";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import InputForm from "../inputs/InputForm";
+import { ISportsFormFields, ISportsFormProps } from "../../shared/interfaces/InterfacesComponents/form/SportsForm.interface";
+import { useSportsContext } from "../../hooks/useSportsContext";
 
+const schema = yup.object().shape({
+    n_sport: yup
+        .string()
+        .required("*El nombre del deporte es obligatorio")
+        .min(3, "*El nombre debe tener al menos 3 caracteres")
+        .max(15, "*El nombre no puede exceder los 15 caracteres"),
+    img_sport: yup
+        .string()
+        .required("*La imagen del deporte es obligatoria"),
+});
 
-
-
-const SportsForm = ({ sport_data, save }: ISportsFormProps) => {
-
-    const [form_data, set_form_data] = useState<Partial<ISport>>({
-        n_sport: '',
-        img_sport: ''
+const SportsForm = ({ sport_data }: ISportsFormProps) => {
+    
+    const {createSport, updateSport} = useSportsContext();
+    
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            n_sport: sport_data?.n_sport || "",
+            img_sport: sport_data?.img_sport || "",
+        },
+        resolver: yupResolver(schema),
     });
 
-    useEffect(() => {
-        if (sport_data) set_form_data(sport_data);
-    },
-        [sport_data]);
-
-    const onSubmit = (e: any) => {
-        e.preventDefault();
-        save(form_data);
-    }
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        
-        set_form_data((old_data) => {
-            return {...old_data,[name]: value,}
-        });
-    };
-
-    const { n_sport, img_sport } = form_data;
-
+    const onSubmit = handleSubmit((data:ISportsFormFields) => {
+        !sport_data? createSport(data) : updateSport({...sport_data,...data});
+    });
 
     return (
         <form onSubmit={onSubmit}>
-            <div>
-                <label>
-                    Nombre
-                    <input
-                        type="text"
-                        name="n_sport"
-                        value={n_sport}
-                        onChange={onChange}
-                        required
-                    />
-                </label>
-            </div>
-            <div>
-            <label>
-                    Imagen
-                    <input
-                        type="text"
-                        name="img_sport"
-                        value={img_sport}
-                        onChange={onChange}
-                        required
-                    />
-                </label>
-            </div>
-            <button type="submit">{sport_data ? 'Modificar' : 'Crear'}</button>
+            <InputForm<ISportsFormFields>
+                label="Nombre"
+                name="n_sport"
+                type="text"
+                register={register}
+                error={errors.n_sport?.message}
+            />
+            <InputForm<ISportsFormFields>
+                label="Imagen"
+                name="img_sport"
+                type="text"
+                register={register}
+                error={errors.img_sport?.message}
+            />
+
+            <button type="submit">
+                {sport_data ? "Actualizar" : "Crear"}
+            </button>
         </form>
     );
-
-}
+};
 
 export default SportsForm;
