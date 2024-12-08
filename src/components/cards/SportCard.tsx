@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ISportCardProps } from "../../shared/interfaces/InterfacesComponents/cards/sportCard.interface";
+import { ISportCardProps } from "../../shared/interfaces/InterfacesComponents/cards/SportCard.interface";
 import { useSportsContext } from "../../hooks/useSportsContext";
 
 const SportCard = ({data}: ISportCardProps) => {
