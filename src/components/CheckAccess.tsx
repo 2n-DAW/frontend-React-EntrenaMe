@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-
-
 interface AccessCheckerProps {
     children: React.ReactNode;
 }
@@ -10,9 +8,9 @@ const CheckAccess: React.FC<AccessCheckerProps> = ({ children }) => {
     const [hasAccess, setHasAccess] = useState<boolean>(false);
 
     useEffect(() => {
-
+        
         console.log('Verificando acceso');
-        setHasAccess(false); 
+        setHasAccess(true); 
     }, []);
 
     if (hasAccess === false) {

@@ -6,6 +6,30 @@ export const axiosAdmin: AxiosInstance = axios.create({
     baseURL: API_URL_ADMIN,
 });
 
+
+
+
+// Agregar un interceptor de solicitud
+axiosAdmin.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+
+
+
+
+
+
+
 const ApiService = {
 
     async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
