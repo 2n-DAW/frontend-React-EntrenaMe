@@ -12,7 +12,4 @@ export interface ISports {
 export interface ISportsContextProps {
     sports: ISport[];
     setSports: React.Dispatch<React.SetStateAction<ISport[]>>;
-    createSport: (sport_data: Partial<ISport>) => Promise<void>
-    updateSport: (sport_data: Partial<ISport>) => Promise<void>
-    deleteSport: (sport_id: number) => Promise<void>
 }

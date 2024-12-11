@@ -15,26 +15,24 @@ function App() {
   return (
     <div className="bg-background1 text-text1 flex flex-col min-h-screen">
       <Suspense fallback={<>Cargando</>} >
-      
-          <BrowserRouter>
+        <BrowserRouter basename="/dashboard">
           <CheckAccess>
-          <SportsProvider>
-            <div className="flex">
-              <Navbar />
-              <div className="flex-grow py-10">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/sports" element={<SportsMain />} />
-                  <Route path="/sports/create" element={<SportsCreate/>}/>
-                  <Route path="/sports/update/:slug_sport" element={<SportsUpdate/>}/>
-                  <Route path="*" element={<div>404</div>} />
-                </Routes>
+            <SportsProvider>
+              <div className="flex">
+                <Navbar />
+                  <div className="flex-grow py-10">
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/sports" element={<SportsMain />} />
+                      <Route path="/sports/create" element={<SportsCreate />} />
+                      <Route path="/sports/update/:slug_sport" element={<SportsUpdate />} />
+                      <Route path="*" element={<div>404</div>} />
+                    </Routes>
+                  </div>
               </div>
-            </div>
             </SportsProvider>
-            </CheckAccess>
-          </BrowserRouter>
-        
+          </CheckAccess>
+        </BrowserRouter>
       </Suspense>
     </div>
   );
