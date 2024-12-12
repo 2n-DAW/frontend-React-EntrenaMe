@@ -9,6 +9,7 @@ const CheckAccess: React.FC<AccessCheckerProps> = ({ children }) => {
 
     useEffect(() => {
         
+        
         console.log('Verificando acceso');
         setHasAccess(true); 
     }, []);
