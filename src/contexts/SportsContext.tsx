@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import { ISport, ISportsContextProps } from '../shared/interfaces/entities/Sport.interface';
+import { ISport} from '../shared/interfaces/entities/Sport.interface';
 import { SportService } from '../services/sport.service';
+import { ISportsContextProps } from '../shared/interfaces/InterfacesContext/SportContext.interface';
 
 
 

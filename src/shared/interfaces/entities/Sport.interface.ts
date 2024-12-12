@@ -9,7 +9,3 @@ export interface ISports {
     sports: Array<ISport>;
 }
 
-export interface ISportsContextProps {
-    sports: ISport[];
-    setSports: React.Dispatch<React.SetStateAction<ISport[]>>;
-}
