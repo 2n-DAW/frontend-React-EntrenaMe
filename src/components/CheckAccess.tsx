@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { AccessCheckerProps } from '../shared/interfaces/InterfacesComponents/CheckAccess.interface';
 
-interface AccessCheckerProps {
-    children: React.ReactNode;
-}
-
-const CheckAccess: React.FC<AccessCheckerProps> = ({ children }) => {
+const CheckAccess = ({ children }: AccessCheckerProps)=> {
     const [hasAccess, setHasAccess] = useState<boolean>(false);
 
     useEffect(() => {
-        
-        
         console.log('Verificando acceso');
         setHasAccess(true); 
     }, []);
