@@ -8,18 +8,20 @@ const SportsMain = React.lazy(() => import('./pages/sport/SportsMain'));
 const SportsCreate = React.lazy(() => import('./pages/sport/SportsCreate'));
 const SportsUpdate = React.lazy(() => import('./pages/sport/SportsUpdate'));
 import CheckAccess from './components/CheckAccess';
+import Header from './components/layout/Header';
 
 function App() {
 
 
   return (
-    <div className="bg-background1 text-text1 flex flex-col min-h-screen">
       <Suspense fallback={<>Cargando</>} >
         <BrowserRouter basename="/dashboard">
           <CheckAccess>
             <SportsProvider>
-              <div className="flex">
+            
+              <div className="bg-background1 text-text1 flex flex-col min-h-screen">
                 <Navbar />
+                <Header />
                   <div className="flex-grow py-10">
                     <Routes>
                       <Route path="/" element={<Home />} />
@@ -34,7 +36,7 @@ function App() {
           </CheckAccess>
         </BrowserRouter>
       </Suspense>
-    </div>
+
   );
 }
 
