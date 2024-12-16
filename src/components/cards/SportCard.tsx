@@ -1,16 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import { ISportCardProps } from "../../shared/interfaces/InterfacesComponents/cards/SportCard.interface";
 import { useSportsContext } from "../../hooks/useSportsContext";
 
 const SportCard = ({data}: ISportCardProps) => {
 
-    const navigate = useNavigate();
     
-    const redirects = {
-        update: (slug_sport: string) => navigate(`/sports/update/${slug_sport}`),
-    }
+    const {deleteSport, setSportSelected}= useSportsContext();
     
-    const {deleteSport}= useSportsContext();
 
     const { img_sport, n_sport,id_sport,slug_sport } = data;
 
@@ -23,7 +18,7 @@ const SportCard = ({data}: ISportCardProps) => {
         <td className="px-6 py-2"> 
             <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-4 rounded mr-3"
-                onClick={() => slug_sport && redirects.update(slug_sport)}
+                onClick={() => data && setSportSelected(data)}
             >
                 Editar
             </button>

@@ -1,9 +1,8 @@
-import React from 'react';
 import SportsForm from '../../components/form/SportsForm';
 import { useParams } from 'react-router-dom';
 import { useSportsContext } from '../../hooks/useSportsContext';
 
-const SportsUpdate: React.FC = () => {
+const SportsUpdate = () => {
     const { slug_sport } = useParams();
     const { sports } = useSportsContext();
 
@@ -14,7 +13,7 @@ const SportsUpdate: React.FC = () => {
     const sport_data = sports.find((sport) => sport.slug_sport === slug_sport);
 
     if (!sport_data) {
-        return <p>Deporte no encontrado</p>;
+        return <p>Seleciona un deporte</p>;
     }
 
     return (

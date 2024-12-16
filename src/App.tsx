@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { SportsProvider } from './contexts/SportsContext';
 import Navbar from './components/layout/Navbar';
-// import { checkAccess } from './services/authService'; // Importa la función de verificación
 const Home = React.lazy(() => import('./pages/Home'));
 const SportsMain = React.lazy(() => import('./pages/sport/SportsMain'));
 const SportsCreate = React.lazy(() => import('./pages/sport/SportsCreate'));
@@ -15,16 +14,17 @@ function App() {
 
 
   return (
+    <div className="bg-background1 text-text1 flex flex-col min-h-screen">
       <Suspense fallback={<>Cargando</>} >
         <BrowserRouter basename="/dashboard">
           <AdminProvider>
           <CheckAccess>
             <SportsProvider>
             
-              <div className="bg-background1 text-text1 flex flex-col min-h-screen">
+              <div className="flex">
                 <Navbar />
                 <Header />
-                  <div className="flex-grow py-10">
+                  <div className="flex-grow py-10 mt-5">
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/sports" element={<SportsMain />} />
@@ -39,7 +39,7 @@ function App() {
           </AdminProvider>
         </BrowserRouter>
       </Suspense>
-
+    </div>
   );
 }
 

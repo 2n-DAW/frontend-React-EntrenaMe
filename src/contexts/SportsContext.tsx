@@ -12,6 +12,7 @@ export const SportsContext = createContext<ISportsContextProps | undefined>(unde
 export const SportsProvider = ({ children }: { children: ReactNode }) => {
 
     const [sports, setSports] = useState<ISport[]>([]);
+    const [sport_selected, setSportSelected] = useState<ISport | undefined>(undefined);
 
     useEffect(() => {
         const fetchSports = async () => {
@@ -25,7 +26,7 @@ export const SportsProvider = ({ children }: { children: ReactNode }) => {
 
     
     return (
-        <SportsContext.Provider value={{ sports, setSports}}>
+        <SportsContext.Provider value={{ sports, setSports, sport_selected, setSportSelected }}>
             {children}
         </SportsContext.Provider>
     );

@@ -10,7 +10,7 @@ export const useSportsContext = () => {
     if (!context) {
         throw new Error('useSports debe ser usado dentro de un SportsContextProvider');
     }
-    const {setSports, sports} = context;
+    const {setSports} = context;
     
 
     const createSport = useCallback(async (sport_data: Partial<ISport>) => {
@@ -36,5 +36,5 @@ export const useSportsContext = () => {
     }, [setSports]);
     
     
-    return {createSport, updateSport, deleteSport, sports};
+    return {...context, createSport, updateSport, deleteSport};
 }
