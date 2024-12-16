@@ -4,8 +4,6 @@ import { SportsProvider } from './contexts/SportsContext';
 import Navbar from './components/layout/Navbar';
 const Home = React.lazy(() => import('./pages/Home'));
 const SportsMain = React.lazy(() => import('./pages/sport/SportsMain'));
-const SportsCreate = React.lazy(() => import('./pages/sport/SportsCreate'));
-const SportsUpdate = React.lazy(() => import('./pages/sport/SportsUpdate'));
 import CheckAccess from './components/CheckAccess';
 import Header from './components/layout/Header';
 import { AdminProvider } from './contexts/AdminContext';
@@ -28,8 +26,6 @@ function App() {
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/sports" element={<SportsMain />} />
-                      <Route path="/sports/create" element={<SportsCreate />} />
-                      <Route path="/sports/update/:slug_sport" element={<SportsUpdate />} />
                       <Route path="*" element={<div>404</div>} />
                     </Routes>
                   </div>

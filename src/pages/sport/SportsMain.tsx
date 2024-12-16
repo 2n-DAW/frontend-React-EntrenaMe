@@ -18,8 +18,9 @@ const SportsMain = () => {
                 </div>
                 
                 <div className=" p-4 rounded-lg">
-                    <h2 className="text-2xl font-semibold mb-4">Modificar Deporte</h2>
-                    <SportsForm sport_data={sport_selected}/>
+                    <h2 className="text-2xl font-semibold mb-4">Editar Deporte</h2>
+                    {sport_selected ? <SportsForm sport_data={sport_selected}/> : <p>Selecciona un deporte</p>}
+                    
                 </div>
                 
             </div>
