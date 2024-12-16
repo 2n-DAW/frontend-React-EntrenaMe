@@ -9,6 +9,7 @@ const SportsCreate = React.lazy(() => import('./pages/sport/SportsCreate'));
 const SportsUpdate = React.lazy(() => import('./pages/sport/SportsUpdate'));
 import CheckAccess from './components/CheckAccess';
 import Header from './components/layout/Header';
+import { AdminProvider } from './contexts/AdminContext';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
   return (
       <Suspense fallback={<>Cargando</>} >
         <BrowserRouter basename="/dashboard">
+          <AdminProvider>
           <CheckAccess>
             <SportsProvider>
             
@@ -34,6 +36,7 @@ function App() {
               </div>
             </SportsProvider>
           </CheckAccess>
+          </AdminProvider>
         </BrowserRouter>
       </Suspense>
 
