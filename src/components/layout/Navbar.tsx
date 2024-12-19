@@ -2,9 +2,8 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <nav className="bg-gray-800 text-white w-64 min-h-screen p-4 flex flex-col">
-            <h2 className="text-2xl font-semibold mb-4 mt-5">Panel de control</h2>
-            <ul className="flex-grow">
+        <nav className="bg-gray-800 text-white w-40 min-h-screen p-4 flex flex-col">
+            <ul className="flex-grow mt-16">
                 <li className="w-full mb-2">
                     <NavLink
                         to="/" 

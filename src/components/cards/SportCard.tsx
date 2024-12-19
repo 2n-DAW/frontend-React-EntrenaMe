@@ -6,8 +6,8 @@ const SportCard = ({ data }: ISportCardProps) => {
     const { img_sport, n_sport, id_sport, slug_sport } = data;
 
     return (
-        <tr className=" bg-gray-900 even:bg-gray-50 even:bg-gray-800 border-b border-gray-700 rounded">
-            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+        <tr className="bg-gray-900 even:bg-gray-50 even:bg-gray-800 border-b border-gray-700 rounded">
+            <th scope="row" className="px-6 py-4 font-medium text-text1 whitespace-nowrap">
                 {id_sport}
             </th>
             <td className="px-6 py-4">
