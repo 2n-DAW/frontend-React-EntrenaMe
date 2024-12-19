@@ -7,6 +7,7 @@ const SportsMain = React.lazy(() => import('./pages/sport/SportsMain'));
 import CheckAccess from './components/CheckAccess';
 import Header from './components/layout/Header';
 import { AdminProvider } from './contexts/AdminContext';
+import CourtHourMain from './pages/court-hour/CourtHourMain';
 
 function App() {
 
@@ -26,6 +27,8 @@ function App() {
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/sports" element={<SportsMain />} />
+                      <Route path="/courts" element={<SportsMain />} />
+                      <Route path="/courts-hours" element={<CourtHourMain/>} />
                       <Route path="*" element={<div>404</div>} />
                     </Routes>
                   </div>
