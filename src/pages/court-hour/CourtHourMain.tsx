@@ -12,9 +12,9 @@ const CourtHourMain = () => {
     }
     
     const onCourtSelected = (court_selected: number) => {
-        console.log("pista", court_selected);
         setCourt(court_selected);
     }
+    
     
     return (
         <>

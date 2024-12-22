@@ -4,7 +4,6 @@ const CalendarCourtHour = ({month, year}: ICalendarCourtHourProps) => {
 
     // Determinar el día de la semana del primer día del mes
     const week_day_first_day = new Date(year, month, 1).getDay();
-    console.log("primer dia", week_day_first_day);
 
     const days_month = new Date(year, month + 1, 0).getDate(); //Cambiamos al siguiente mes y retrocedemos un día para saber cuantos dis teien este mes
 
@@ -33,8 +32,6 @@ const CalendarCourtHour = ({month, year}: ICalendarCourtHourProps) => {
         }
         rows.push(row);
     }
-    console.log(rows);
-
 
 
 

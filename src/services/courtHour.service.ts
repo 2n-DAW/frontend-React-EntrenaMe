@@ -1,13 +1,8 @@
 import ApiService from "../core/api.service";
-import { IAdmin } from "../shared/interfaces/entities/User.interface";
+import { ICourtsHours } from "../shared/interfaces/entities/CourtHourt.interface";
 
-
-export const UserService = {
-    getCurrentUser(): Promise<IAdmin> {
-        return ApiService.get<IAdmin>("user/currentUser");
+export const CourtHourService = {
+    getAllCourtsHours(): Promise<ICourtsHours> {
+        return ApiService.get<ICourtsHours>("courtsHours");
     },
 };
-
-
-
-
