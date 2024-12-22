@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import Select from "../selects/Select";
 import { IFiltersCourtHourProps } from "../../shared/interfaces/InterfacesComponents/filters/FiltersCourtHour.interface";
-import { CourtService } from "../../services/court.service";
-import { ICourt } from "../../shared/interfaces/entities/Court.interface";
+import { useCourt } from "../../hooks/useCourt";
 
 
-const FiltersCourtHour = ({ onMonthSelected }: IFiltersCourtHourProps) => {
+
+const FiltersCourtHour = ({ onMonthSelected, onCourtSelected }: IFiltersCourtHourProps) => {
+    
+    const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
+    const [selectedCourt, setSelectedCourt] = useState<number | null>(null);
+
+    
+    
 
     const options_month: { value: number, label: string }[] = [
         { value: 0, label: 'Enero' },
@@ -22,29 +28,35 @@ const FiltersCourtHour = ({ onMonthSelected }: IFiltersCourtHourProps) => {
         { value: 11, label: 'Diciembre' }
     ];
 
-    const [courts, setCourts] = useState<ICourt[]>([]);
 
+    const { courts } = useCourt();
 
-    const gerCourts = async () => {
-        const resp = await CourtService.getAllCourts()
-        console.log(resp);
-        setCourts(resp);
-    }
+    const [options_court, setOptionsCourt] = useState<{ value: number, label: string }[]>([]);
 
     useEffect(() => {
-        gerCourts();
-    }, []);
+        console.log(courts);
+        const resp: { value: number, label: string }[] = courts.map((court) => {
+            return { value: court.id_court, label: court.n_court };
+        });
+        
+        setOptionsCourt(resp);
+
+    }, [courts]);
 
 
 
-
-    const [selectedValue, setSelectedValue] = useState<number | null>(null);
-
-    const onChange = (value: number | string) => {
+    const onChangeMonth = (value: number | string) => {
         value = parseInt(value as string);
         console.log(value);
-        setSelectedValue(value);
+        setSelectedMonth(value);
         onMonthSelected(value);
+    };
+    
+    const onChangeCourt = (value: number | string) => {
+        value = parseInt(value as string);
+        console.log(value);
+        setSelectedCourt(value);
+        onCourtSelected(value);
     };
 
     return (
@@ -53,12 +65,21 @@ const FiltersCourtHour = ({ onMonthSelected }: IFiltersCourtHourProps) => {
                 label="Selecciona un mes"
                 id="Meses"
                 options={options_month}
-                data={selectedValue ?? ""}
+                data={selectedMonth ?? ""}
                 placeholder="Selecciona un mes"
-                onDataChange={onChange}
+                onDataChange={onChangeMonth}
             />
 
-            
+            <Select
+                label="Selecciona una Pista"
+                id="Pistas"
+                options={options_court}
+                data={selectedCourt ?? ""}
+                placeholder="Selecciona una Pista"
+                onDataChange={onChangeCourt}
+            />
+
+
         </>
     );
 };

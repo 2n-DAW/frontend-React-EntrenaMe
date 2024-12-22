@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { SportsProvider } from './contexts/SportsContext';
+import { CourtProvider } from './contexts/CourtContext';
 import Navbar from './components/layout/Navbar';
 const Home = React.lazy(() => import('./pages/Home'));
 const SportsMain = React.lazy(() => import('./pages/sport/SportsMain'));
@@ -19,7 +20,7 @@ function App() {
           <AdminProvider>
           <CheckAccess>
             <SportsProvider>
-            
+            <CourtProvider>
               <div className="flex">
                 <Navbar />
                 <Header />
@@ -33,6 +34,7 @@ function App() {
                     </Routes>
                   </div>
               </div>
+              </CourtProvider>
             </SportsProvider>
           </CheckAccess>
           </AdminProvider>
