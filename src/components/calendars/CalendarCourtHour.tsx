@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { ICalendarCourtHourProps } from "../../shared/interfaces/InterfacesComponents/calendars/CalendarCourtHour.interface";
 
-const CalendarCourtHour = ({month, year}: ICalendarCourtHourProps) => {
+const CalendarCourtHour = ({month, year, data}: ICalendarCourtHourProps) => {
 
     // Determinar el día de la semana del primer día del mes
     const week_day_first_day = new Date(year, month, 1).getDay();
@@ -34,6 +35,12 @@ const CalendarCourtHour = ({month, year}: ICalendarCourtHourProps) => {
     }
 
 
+    useEffect(() => {
+        console.log("datitossss",data);
+    }, [data]);
+    
+    
+    
 
 
 
@@ -51,19 +58,19 @@ const CalendarCourtHour = ({month, year}: ICalendarCourtHourProps) => {
                         <h3 className="text-left text-xl text-color1 pl-4">{day}</h3>
                         <div className="w-full flex py-2">
                             <div className="w-1/2 m-0">
-                                <button id={`${day}_${month}_08:00-09:00`} className="px-2 rounded-full bg-color2 text-background1 hover:bg-color2_hover text-xs">08:00-09:00</button>
-                                <button id={`${day}_${month}_09:00-10:00`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">09:00-10:00</button>
-                                <button id={`${day}_${month}_10:00-11:00`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">10:00-11:00</button>
-                                <button id={`${day}_${month}_11:00-12:00`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">11:00-12:00</button>
-                                <button id={`${day}_${month}_12:00-13:00`} className="px-2 rounded-full bg-color2 text-background1 hover:bg-color2_hover text-xs">12:00-13:00</button>
+                                <button id={`${day}_${month}_1`} className="px-2 rounded-full bg-color2 text-background1 hover:bg-color2_hover text-xs">08:00-09:00</button>
+                                <button id={`${day}_${month}_2`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">09:00-10:00</button>
+                                <button id={`${day}_${month}_3`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">10:00-11:00</button>
+                                <button id={`${day}_${month}_4`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">11:00-12:00</button>
+                                <button id={`${day}_${month}_5`} className="px-2 rounded-full bg-color2 text-background1 hover:bg-color2_hover text-xs">12:00-13:00</button>
                             </div>
 
                             <div className=" w-1/2 m-0">
-                                <button id={`${day}_${month}_13:00-14:00`} className="px-2 rounded-full bg-color2 text-background1 hover:bg-color2_hover text-xs">13:00-14:00</button>
-                                <button id={`${day}_${month}_16:00-17:00`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">16:00-17:00</button>
-                                <button id={`${day}_${month}_17:00-18:00`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">17:00-18:00</button>
-                                <button id={`${day}_${month}_18:00-19:00`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">18:00-19:00</button>
-                                <button id={`${day}_${month}_19:00-20:00`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">19:00-20:00</button>
+                                <button id={`${day}_${month}_6`} className="px-2 rounded-full bg-color2 text-background1 hover:bg-color2_hover text-xs">13:00-14:00</button>
+                                <button id={`${day}_${month}_7`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">16:00-17:00</button>
+                                <button id={`${day}_${month}_8`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">17:00-18:00</button>
+                                <button id={`${day}_${month}_9`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">18:00-19:00</button>
+                                <button id={`${day}_${month}_10`} className="px-2 rounded-full bg-transparent border border-color2 text-color2 hover:bg-color2_hover text-xs">19:00-20:00</button>
                             </div>
                         </div>
                     </td>
