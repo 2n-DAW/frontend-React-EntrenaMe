@@ -8,7 +8,7 @@ const CourtHourMain = () => {
     
     const[ court, setCourt ] = useState<number | null>(null);
     
-    // const {courts_hours} = useCourtHour();
+    const [year, setYear] = useState(new Date().getFullYear());
     
     const onMonthSelected = (month_selected: number) => {
         setMonth(month_selected);
@@ -18,15 +18,15 @@ const CourtHourMain = () => {
         setCourt(court_selected);
     }
     
-    // useEffect(() => {
-    //     console.log(courts_hours);
-    // }, [courts_hours]);
+    const onYearSelected = (year_selected: number) => {
+        setYear(year_selected);
+    }
     
     
     return (
         <>
-            <FiltersCourtHour onMonthSelected={onMonthSelected} onCourtSelected={onCourtSelected}/>
-            <CalendarCourtHour month={month} year={new Date().getFullYear()}/>
+            <FiltersCourtHour onMonthSelected={onMonthSelected} onCourtSelected={onCourtSelected} onYearSelected={onYearSelected}/>
+            <CalendarCourtHour month={month} year={year}/>
         </>
     );
 };

@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import Select from "../selects/Select";
 import { IFiltersCourtHourProps } from "../../shared/interfaces/InterfacesComponents/filters/FiltersCourtHour.interface";
 import { useCourt } from "../../hooks/useCourt";
+import { useCourtHour } from "../../hooks/useCourtHour";
 
 
 
-const FiltersCourtHour = ({ onMonthSelected, onCourtSelected }: IFiltersCourtHourProps) => {
+const FiltersCourtHour = ({ onMonthSelected, onCourtSelected, onYearSelected }: IFiltersCourtHourProps) => {
     
     const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
     const [selectedCourt, setSelectedCourt] = useState<number | null>(null);
+    const [selectedYear, setSelectedYear] = useState<number | null>(null);
 
     
     
@@ -30,8 +32,10 @@ const FiltersCourtHour = ({ onMonthSelected, onCourtSelected }: IFiltersCourtHou
 
 
     const { courts } = useCourt();
+    const {years} = useCourtHour();
 
     const [options_court, setOptionsCourt] = useState<{ value: number, label: string }[]>([]);
+    const [options_year, setOptionsYear] = useState<{ value: number, label: string }[]>([]);
 
     useEffect(() => {
         console.log(courts);
@@ -42,6 +46,20 @@ const FiltersCourtHour = ({ onMonthSelected, onCourtSelected }: IFiltersCourtHou
         setOptionsCourt(resp);
 
     }, [courts]);
+    
+    useEffect(() => {
+        if (!years) return;
+    
+        const years_unique = Array.from(new Set(years.map((year) => year || 2024)));
+    
+        const resp: { value: number; label: string }[] = years_unique.map((year) => ({
+            value: year,
+            label: year.toString(),
+        }));
+    
+        setOptionsYear(resp);
+    }, [years]);
+    
 
 
 
@@ -58,6 +76,13 @@ const FiltersCourtHour = ({ onMonthSelected, onCourtSelected }: IFiltersCourtHou
         setSelectedCourt(value);
         onCourtSelected(value);
     };
+    
+    const onChangeYear = (value: number | string) => {
+        value = parseInt(value as string);
+        console.log(value);
+        setSelectedYear(value);
+        onYearSelected(value);
+    }
 
     return (
         <>
@@ -78,7 +103,16 @@ const FiltersCourtHour = ({ onMonthSelected, onCourtSelected }: IFiltersCourtHou
                 placeholder="Selecciona una Pista"
                 onDataChange={onChangeCourt}
             />
+            
+            <Select
+                label="Selecciona un año"
+                id="Años"
+                options={options_year}
+                data={selectedYear ?? ""}
+                placeholder="Selecciona un año"
+                onDataChange={onChangeYear}
 
+            />
 
         </>
     );
