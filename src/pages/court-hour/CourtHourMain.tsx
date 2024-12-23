@@ -38,11 +38,15 @@ const CourtHourMain = () => {
         setData(data);
     }, [courts_hours, month, year, court]);
     
+    const onClickHour = (court_hour: Partial<ICourtHour>) => {
+        console.log("court_hourfsdfsdfsdfsd", court_hour);
+    }
+    
     
     return (
         <>
             <FiltersCourtHour onMonthSelected={onMonthSelected} onCourtSelected={onCourtSelected} onYearSelected={onYearSelected}/>
-            <CalendarCourtHour month={month} year={year} data ={data} />
+            <CalendarCourtHour month={month} year={year} data ={data} onClickHour={onClickHour}/>
         </>
     );
 };
