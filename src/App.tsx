@@ -9,6 +9,7 @@ import CheckAccess from './components/CheckAccess';
 import Header from './components/layout/Header';
 import { AdminProvider } from './contexts/AdminContext';
 import CourtHourMain from './pages/court-hour/CourtHourMain';
+import { CourtHourProvider } from './contexts/CourtHourContext';
 
 function App() {
 
@@ -18,25 +19,27 @@ function App() {
       <Suspense fallback={<>Cargando</>} >
         <BrowserRouter basename="/dashboard">
           <AdminProvider>
-          <CheckAccess>
-            <SportsProvider>
-            <CourtProvider>
-              <div className="flex">
-                <Navbar />
-                <Header />
-                  <div className="flex-grow py-10 mt-5">
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/sports" element={<SportsMain />} />
-                      <Route path="/courts" element={<SportsMain />} />
-                      <Route path="/courts-hours" element={<CourtHourMain/>} />
-                      <Route path="*" element={<div>404</div>} />
-                    </Routes>
-                  </div>
-              </div>
-              </CourtProvider>
-            </SportsProvider>
-          </CheckAccess>
+            <CheckAccess>
+              <SportsProvider>
+                <CourtProvider>
+                  <CourtHourProvider>
+                    <div className="flex">
+                      <Navbar />
+                      <Header />
+                      <div className="flex-grow py-10 mt-5">
+                        <Routes>
+                          <Route path="/" element={<Home />} />
+                          <Route path="/sports" element={<SportsMain />} />
+                          <Route path="/courts" element={<SportsMain />} />
+                          <Route path="/courts-hours" element={<CourtHourMain />} />
+                          <Route path="*" element={<div>404</div>} />
+                        </Routes>
+                      </div>
+                    </div>
+                  </CourtHourProvider>
+                </CourtProvider>
+              </SportsProvider>
+            </CheckAccess>
           </AdminProvider>
         </BrowserRouter>
       </Suspense>

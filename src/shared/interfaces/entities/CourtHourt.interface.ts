@@ -10,6 +10,7 @@ export interface ICourtHour {
     slug_court_hour: string;
     court: ICourt;
     hour: IHour;
+    year: number;
     
 }
 
