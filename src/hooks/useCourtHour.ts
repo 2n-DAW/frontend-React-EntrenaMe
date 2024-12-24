@@ -2,6 +2,7 @@ import { useCallback, useContext } from "react";
 import { CourtHourContext } from "../contexts/CourtHourContext";
 import { CourtHourService } from "../services/courtHour.service";
 import { ICourtHourCreate } from "../shared/interfaces/InterfacesServices/courtHourService.interface";
+import { ICourtHour } from "../shared/interfaces/entities/CourtHourt.interface";
 
 
 export const useCourtHour = () => {
@@ -26,7 +27,21 @@ export const useCourtHour = () => {
         setCourtHours(courts_hours?.filter((court_hour) => court_hour.id_court_hour !== resp.id_court_hour));
     }
     , [setCourtHours, courts_hours]);
+    
+    
+    
+    const createCourtHourArray = useCallback(async (court_data: ICourtHourCreate[]) => {
+        const court = await CourtHourService.createCourtHourArray(court_data);
+        if (!court) return;
+        setCourtHours([...courts_hours || [], ...court]);
+    }, [setCourtHours, courts_hours]);
 
+    
+    const deleteCourtHourArray = useCallback(async (court_data: Partial<ICourtHour>[]) => {
+        const court = await CourtHourService.deleteCourtHourArray(court_data);
+        if (!court) return;
+        setCourtHours(courts_hours?.filter((court_hour) => !court.find((item) => item.id_court_hour === court_hour.id_court_hour)));
+    }, [setCourtHours, courts_hours]);
 
-    return {...context, createCourtHour, deleteCourtHour};
+    return {...context, createCourtHour, deleteCourtHour, createCourtHourArray, deleteCourtHourArray};
 }

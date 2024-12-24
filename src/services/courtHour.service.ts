@@ -7,11 +7,20 @@ export const CourtHourService = {
         return ApiService.get<ICourtsHours>("courtsHours");
     },
     
-    createCourtHour(court_hour_data: ICourtHourCreate): Promise<ICourtHour> {
-        return ApiService.post<ICourtHour>("courtsHours", court_hour_data);
+    createCourtHour(courts_hours: ICourtHourCreate): Promise<ICourtHour> {
+        return ApiService.post<ICourtHour>("courtsHours", courts_hours);
     },
     
     deleteCourtHour(id_court_hour: number): Promise<ICourtHour> {
         return ApiService.delete<ICourtHour>(`courtsHours/${id_court_hour}`);
+    },
+    
+    createCourtHourArray(courts_hours: ICourtHourCreate[]): Promise<ICourtHour[]> {
+        return ApiService.post<ICourtHour[]>("courtsHours/array", {courts_hours});
+    },
+    
+    deleteCourtHourArray(courts_hours: Partial<ICourtHour>[]): Promise<ICourtHour[]> {
+        return ApiService.post<ICourtHour[]>(`courtsHours/array/delete`, {courts_hours});
     }
+    
 };

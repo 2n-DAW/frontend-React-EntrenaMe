@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { ICalendarCourtHourProps } from "../../shared/interfaces/InterfacesComponents/calendars/CalendarCourtHour.interface";
+import { ICourtHour } from "../../shared/interfaces/entities/CourtHourt.interface";
 
-const CalendarCourtHour = ({ month, year, data, onClickHour }: ICalendarCourtHourProps) => {
+const CalendarCourtHour = ({ month, year, data, changes }: ICalendarCourtHourProps) => {
 
     // Determinar el día de la semana del primer día del mes
     const week_day_first_day = new Date(year, month, 1).getDay();
@@ -50,21 +51,34 @@ const CalendarCourtHour = ({ month, year, data, onClickHour }: ICalendarCourtHou
     const isButtonSelected = (id: string) => {
         return ids.includes(id);
     };
-    
+
+
+
+
     const onClick = (id: string) => {
-        
-        const id_info = id.split('_');
-        
-        const court_hour_data ={
-            day_number: parseInt(id_info[0]),
-            id_month: parseInt(id_info[1]),
-            id_hour: parseInt(id_info[2]),
-            year: year,
+        if (ids.includes(id)) {
+            const new_ids = ids.filter((item) => item !== id);
+            setIds(new_ids);
+            return;
         }
-        onClickHour(court_hour_data);
-        
-    
-    }
+
+        setIds((prevIds) => {
+            return [...prevIds, id];
+        });
+    };
+
+    useEffect(() => {
+        const court_hour_changes = ids.map((item) => {
+            const [day_number, id_month, id_hour] = item.split('_');
+            return {
+                day_number: parseInt(day_number),
+                id_month: parseInt(id_month),
+                id_hour: parseInt(id_hour),
+                year: year,
+            };
+        });
+        changes(court_hour_changes as ICourtHour[]);
+    }, [ids]);
 
 
 
@@ -80,69 +94,69 @@ const CalendarCourtHour = ({ month, year, data, onClickHour }: ICalendarCourtHou
                         <h3 className="text-left text-xl text-color1 pl-4">{day}</h3>
                         <div className="w-full flex py-2">
                             <div className="w-1/2 m-0">
-                                <button id={`${day}_${month}_1`} 
-                                onClick={() => onClick(`${day}_${month}_1`)}
-                                className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_1`)
+                                <button id={`${day}_${month}_1`}
+                                    onClick={() => onClick(`${day}_${month}_1`)}
+                                    className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_1`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
-                                    }`}>08:00-09:00</button>
-                                <button id={`${day}_${month}_2`} 
-                                
-                                className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_2`)
+                                        }`}>08:00-09:00</button>
+                                <button id={`${day}_${month}_2`}
+
+                                    className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_2`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
-                                    }`}>09:00-10:00</button>
-                                <button id={`${day}_${month}_3`} 
-                                
-                                className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_3`)
+                                        }`}>09:00-10:00</button>
+                                <button id={`${day}_${month}_3`}
+
+                                    className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_3`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
-                                    }`}>10:00-11:00</button>
-                                <button id={`${day}_${month}_4`} 
-                                
-                                className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_4`)
+                                        }`}>10:00-11:00</button>
+                                <button id={`${day}_${month}_4`}
+
+                                    className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_4`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
-                                    }`}>11:00-12:00</button>
-                                <button id={`${day}_${month}_5`} 
-                                
-                                className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_5`)
+                                        }`}>11:00-12:00</button>
+                                <button id={`${day}_${month}_5`}
+
+                                    className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_5`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
-                                    }`}>12:00-13:00</button>
+                                        }`}>12:00-13:00</button>
                             </div>
 
                             <div className=" w-1/2 m-0">
-                                <button id={`${day}_${month}_6`} 
-                                
-                                className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_6`)
+                                <button id={`${day}_${month}_6`}
+
+                                    className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_6`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
-                                    }`}>13:00-14:00</button>
-                                <button id={`${day}_${month}_7`} 
-                                
-                                className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_7`)
+                                        }`}>13:00-14:00</button>
+                                <button id={`${day}_${month}_7`}
+
+                                    className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_7`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
-                                    }`}>16:00-17:00</button>
-                                <button id={`${day}_${month}_8`} 
-                                
-                                className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_8`)
+                                        }`}>16:00-17:00</button>
+                                <button id={`${day}_${month}_8`}
+
+                                    className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_8`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
-                                    }`}>17:00-18:00</button>
-                                <button id={`${day}_${month}_9`} 
-                                
-                                className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_9`)
+                                        }`}>17:00-18:00</button>
+                                <button id={`${day}_${month}_9`}
+
+                                    className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_9`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
-                                    }`}>18:00-19:00</button>
-                                <button id={`${day}_${month}_10`} 
-                                
-                                className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_10`)
+                                        }`}>18:00-19:00</button>
+                                <button id={`${day}_${month}_10`}
+
+                                    className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_10`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
-                                    }`}>19:00-20:00</button>
+                                        }`}>19:00-20:00</button>
                             </div>
                         </div>
                     </td>
