@@ -16,7 +16,6 @@ export const useCourtHour = () => {
     const createCourtHour = useCallback(async (court_data: ICourtHourCreate) => {
         const court = await CourtHourService.createCourtHour(court_data);
         if (!court) return;
-        console.log("courts_hours",courts_hours);
         setCourtHours([...courts_hours || [], court]);
     }, [setCourtHours, courts_hours]);
     
@@ -31,17 +30,21 @@ export const useCourtHour = () => {
     
     
     const createCourtHourArray = useCallback(async (court_data: ICourtHourCreate[]) => {
-        const court = await CourtHourService.createCourtHourArray(court_data);
-        if (!court) return;
-        setCourtHours([...courts_hours || [], ...court]);
+        const resp = await CourtHourService.createCourtHourArray(court_data);
+        if (!resp) return;
+        console.log("resp",...resp.courts_hours);
+        setCourtHours((courts_hours)=>[...courts_hours || [], ...resp.courts_hours]);
     }, [setCourtHours, courts_hours]);
 
     
     const deleteCourtHourArray = useCallback(async (court_data: Partial<ICourtHour>[]) => {
-        const court = await CourtHourService.deleteCourtHourArray(court_data);
-        if (!court) return;
-        setCourtHours(courts_hours?.filter((court_hour) => !court.find((item) => item.id_court_hour === court_hour.id_court_hour)));
+        const resp = await CourtHourService.deleteCourtHourArray(court_data);
+        if (!resp) return;
+        setCourtHours(courts_hours?.filter((court_hour) => resp.courts_hours.find((item) => item.id_court_hour !== court_hour.id_court_hour)));
+    
     }, [setCourtHours, courts_hours]);
 
+    
+    
     return {...context, createCourtHour, deleteCourtHour, createCourtHourArray, deleteCourtHourArray};
 }

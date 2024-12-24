@@ -16,6 +16,8 @@ const CourtHourMain = () => {
     const [changes, setChanges] = useState<Partial<ICourtHour>[]>([]);
 
     const { courts_hours, createCourtHourArray, deleteCourtHourArray } = useCourtHour();
+    
+    
 
     const onMonthSelected = (month_selected: number) => {
         setMonth(month_selected);
@@ -36,13 +38,7 @@ const CourtHourMain = () => {
     const [data, setData] = useState<ICourtHour[]>([]);
 
 
-    useEffect(() => {
-        if (!courts_hours) return;
-        const data = courts_hours.filter((court_hour) => {
-            return court_hour.id_month === month && court_hour.year === year && (court ? court_hour.id_court === court : true);
-        });
-        setData(data);
-    }, [courts_hours, month, year, court]);
+ 
 
     // const onClickHour = (court_hour: Partial<ICourtHour>) => {
 
@@ -75,7 +71,7 @@ const CourtHourMain = () => {
 
 
 
-    const onSaveClick = () => {
+    const onSaveClick = async () => {
         console.log('onSaveClick---------------------------------------------------------------');
         let court_hour_add: ICourtHourCreate[] = [];
         let court_hour_delete: ICourtHour[] = [];
@@ -104,7 +100,6 @@ const CourtHourMain = () => {
         
         data.forEach((court_hour) => {
             
-            console.log('court_hour', court_hour);
             
             const searched_court_hour = changes.find((court_hour_data) => {
                 return (court_hour_data.year === court_hour.year
@@ -113,32 +108,41 @@ const CourtHourMain = () => {
                     && (court || 1) === court_hour.id_court 
                     && court_hour_data.id_month === court_hour.id_month);
             });
-            console.log('searched_court_hour', searched_court_hour);
             if (!searched_court_hour) {
                 
                 court_hour_delete.push(court_hour);
             }
         });
         
-        
-        
-        
-        // if (changes.length === 0 ) {
-        //     court_hour_delete = data;
-        // }
+        if (changes.length === 0 ) {
+            court_hour_delete = data;
+        }
         
         console.log('court_hour_add', court_hour_add);
         console.log('court_hour_delete', court_hour_delete);
         
+        court_hour_delete.length>0 && await deleteCourtHourArray(court_hour_delete);
+        court_hour_add.length>0 && await createCourtHourArray(court_hour_add);
         
-        court_hour_add.length>0 && createCourtHourArray(court_hour_add);
-        court_hour_delete.length>0 && deleteCourtHourArray(court_hour_delete);
-
         
-
     }
 
 
+    
+    useEffect(() => {
+        if (!courts_hours) return;
+        const data = courts_hours.filter((court_hour) => {
+            return court_hour.id_month === month && court_hour.year === year && (court ? court_hour.id_court === court : true);
+        });
+        setData(data);
+    }, [courts_hours, month, year, court]);
+    
+    
+    
+    useEffect(() => {
+        console.log('data', data);
+    }
+    , [data]);
 
 
     return (

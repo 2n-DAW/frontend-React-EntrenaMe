@@ -101,25 +101,25 @@ const CalendarCourtHour = ({ month, year, data, changes }: ICalendarCourtHourPro
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
                                         }`}>08:00-09:00</button>
                                 <button id={`${day}_${month}_2`}
-
+                                    onClick={() => onClick(`${day}_${month}_2`)}
                                     className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_2`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
                                         }`}>09:00-10:00</button>
                                 <button id={`${day}_${month}_3`}
-
+                                    onClick={() => onClick(`${day}_${month}_3`)}
                                     className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_3`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
                                         }`}>10:00-11:00</button>
                                 <button id={`${day}_${month}_4`}
-
+                                    onClick={() => onClick(`${day}_${month}_4`)}
                                     className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_4`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
                                         }`}>11:00-12:00</button>
                                 <button id={`${day}_${month}_5`}
-
+                                    onClick={() => onClick(`${day}_${month}_5`)}
                                     className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_5`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
@@ -128,31 +128,31 @@ const CalendarCourtHour = ({ month, year, data, changes }: ICalendarCourtHourPro
 
                             <div className=" w-1/2 m-0">
                                 <button id={`${day}_${month}_6`}
-
+                                    onClick={() => onClick(`${day}_${month}_6`)}
                                     className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_6`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
                                         }`}>13:00-14:00</button>
                                 <button id={`${day}_${month}_7`}
-
+                                    onClick={() => onClick(`${day}_${month}_7`)}
                                     className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_7`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
                                         }`}>16:00-17:00</button>
                                 <button id={`${day}_${month}_8`}
-
+                                    onClick={() => onClick(`${day}_${month}_8`)}
                                     className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_8`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
                                         }`}>17:00-18:00</button>
                                 <button id={`${day}_${month}_9`}
-
+                                    onClick={() => onClick(`${day}_${month}_9`)}
                                     className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_9`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
                                         }`}>18:00-19:00</button>
                                 <button id={`${day}_${month}_10`}
-
+                                    onClick={() => onClick(`${day}_${month}_10`)}
                                     className={`px-2 rounded-full text-xs ${isButtonSelected(`${day}_${month}_10`)
                                         ? "bg-color2 text-background1 hover:bg-color2_hover"
                                         : "bg-transparent border border-color2 text-color2 hover:bg-color2_hover"
