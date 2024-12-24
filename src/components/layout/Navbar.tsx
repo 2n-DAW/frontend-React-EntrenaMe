@@ -2,9 +2,8 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <nav className="bg-gray-800 text-white w-64 min-h-screen p-4 flex flex-col">
-            <h2 className="text-2xl font-semibold mb-4">Panel de control</h2>
-            <ul className="flex-grow">
+        <nav className="bg-gray-800 text-white w-40 min-h-screen p-4 flex flex-col">
+            <ul className="flex-grow mt-16">
                 <li className="w-full mb-2">
                     <NavLink
                         to="/" 
@@ -32,11 +31,11 @@ const Navbar = () => {
                             }`
                         }
                     >
-                        <span className="inline-block w-full">Lista de deportes</span>
+                        <span className="inline-block w-full">Deportes</span>
                     </NavLink>
                     
                     <NavLink 
-                        to="/sports/create" 
+                        to="/courts" 
                         className={({ isActive }) => 
                             `block w-full py-2 px-4 rounded transition-colors duration-200 overflow-hidden whitespace-nowrap text-left
                                 ${isActive 
@@ -45,7 +44,21 @@ const Navbar = () => {
                             }`
                         }
                     >
-                        <span className="inline-block w-full">Crear deporte</span>
+                        <span className="inline-block w-full">Pistas</span>
+                    </NavLink>
+                    
+                    
+                    <NavLink 
+                        to="/courts-hours" 
+                        className={({ isActive }) => 
+                            `block w-full py-2 px-4 rounded transition-colors duration-200 overflow-hidden whitespace-nowrap text-left
+                                ${isActive 
+                                    ? "bg-gray-700 text-white" 
+                                    : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                            }`
+                        }
+                    >
+                        <span className="inline-block w-full">Horas Pistas</span>
                     </NavLink>
                     
                     

@@ -1,29 +1,43 @@
 import { ISports } from "../../shared/interfaces/entities/Sport.interface";
 import SportCard from "../cards/SportCard";
 
-export default function SportsList ({ sports }: ISports) {
+export default function SportsList({ sports }: ISports) {
 
-    return  (
+    return (
         <div className="min-h-[77vh] overflow-x-auto p-8">
-            <h1 className="text-3xl font-bold mb-4">Lista de deportes</h1>
-            <table className="w-full border-2 border-gray-300">
-                <thead className="bg-teal-400 uppercase">
-                    <tr>
-                        <th className="border-2 border-gray-300 p-2">ID</th>
-                        <th className="border-2 border-gray-300 p-2">Nombre</th>
-                        <th className="border-2 border-gray-300 p-2">Imagen</th>
-                        <th className="border-2 border-gray-300 p-2">Slug</th>
-                        <th className="border-2 border-gray-300 p-2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody className="tbody_sports_list">
-                    {
-                        sports.map(sport => (
-                            <SportCard key={sport.id_sport} data={sport}/>
-                        ))
-                    }
-                </tbody>
-            </table>
+            <h2 className="text-2xl font-semibold mb-4">Lista de deportes</h2>
+            <div className="relative overflow-x-auto shadow-md rounded">
+                <table className="w-full text-sm text-left rtl:text-right text-text1 p-2">
+                    <thead className="text-xs text-text1 uppercase bg-background3 rounded">
+                        <tr>
+                            <th scope="col" className="px-6 py-3">
+                                ID
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Nombre
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Imagen
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Slug
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            sports.map(sport => (
+                                <SportCard key={sport.id_sport} data={sport} />
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }
+
+

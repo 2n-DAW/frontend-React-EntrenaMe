@@ -12,20 +12,21 @@ export const SportsContext = createContext<ISportsContextProps | undefined>(unde
 export const SportsProvider = ({ children }: { children: ReactNode }) => {
 
     const [sports, setSports] = useState<ISport[]>([]);
+    const [sport_selected, setSportSelected] = useState<ISport | undefined>(undefined);
+    
+    const fetchSports = async () => {
+        const resp = await SportService.getAll();
+        if (!resp) return;
+        setSports(resp.sports);
+    };
 
     useEffect(() => {
-        const fetchSports = async () => {
-            const resp = await SportService.getAll();
-            if (!resp) return;
-            setSports(resp.sports);
-        };
-
         fetchSports();
     }, []);
 
     
     return (
-        <SportsContext.Provider value={{ sports, setSports}}>
+        <SportsContext.Provider value={{ sports, setSports, sport_selected, setSportSelected }}>
             {children}
         </SportsContext.Provider>
     );

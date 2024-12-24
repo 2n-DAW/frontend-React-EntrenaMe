@@ -4,6 +4,7 @@ import * as yup from "yup";
 import InputForm from "../inputs/InputForm";
 import { ISportsFormFields, ISportsFormProps } from "../../shared/interfaces/InterfacesComponents/form/SportsForm.interface";
 import { useSportsContext } from "../../hooks/useSportsContext";
+import { useEffect } from "react";
 
 const schema = yup.object().shape({
     n_sport: yup
@@ -17,19 +18,26 @@ const schema = yup.object().shape({
 });
 
 const SportsForm = ({ sport_data }: ISportsFormProps) => {
-    
-    const {createSport, updateSport} = useSportsContext();
-    
-    const { register, handleSubmit, formState: { errors } } = useForm({
+
+    const { createSport, updateSport } = useSportsContext();
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: {
-            n_sport: sport_data?.n_sport || "",
-            img_sport: sport_data?.img_sport || "",
+            n_sport: "",
+            img_sport: "",
         },
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = handleSubmit((data:ISportsFormFields) => {
-        !sport_data? createSport(data) : updateSport({...sport_data,...data});
+    useEffect(() => {
+        reset({
+            n_sport: sport_data?.n_sport || "",
+            img_sport: sport_data?.img_sport || "",
+        });
+    }, [sport_data, reset]);
+
+    const onSubmit = handleSubmit((data: ISportsFormFields) => {
+        !sport_data ? createSport(data) : updateSport({ ...sport_data, ...data });
     });
 
     return (
