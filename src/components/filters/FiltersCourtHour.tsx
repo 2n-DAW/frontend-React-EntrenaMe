@@ -12,9 +12,6 @@ const FiltersCourtHour = ({ onMonthSelected, onCourtSelected, onYearSelected }: 
     const [selectedCourt, setSelectedCourt] = useState<number | null>(null);
     const [selectedYear, setSelectedYear] = useState<number | null>(null);
 
-    
-    
-
     const options_month: { value: number, label: string }[] = [
         { value: 0, label: 'Enero' },
         { value: 1, label: 'Febrero' },
@@ -38,7 +35,6 @@ const FiltersCourtHour = ({ onMonthSelected, onCourtSelected, onYearSelected }: 
     const [options_year, setOptionsYear] = useState<{ value: number, label: string }[]>([]);
 
     useEffect(() => {
-        console.log(courts);
         const resp: { value: number, label: string }[] = courts.map((court) => {
             return { value: court.id_court, label: court.n_court };
         });
@@ -65,21 +61,18 @@ const FiltersCourtHour = ({ onMonthSelected, onCourtSelected, onYearSelected }: 
 
     const onChangeMonth = (value: number | string) => {
         value = parseInt(value as string);
-        console.log(value);
         setSelectedMonth(value);
         onMonthSelected(value);
     };
     
     const onChangeCourt = (value: number | string) => {
         value = parseInt(value as string);
-        console.log(value);
         setSelectedCourt(value);
         onCourtSelected(value);
     };
     
     const onChangeYear = (value: number | string) => {
         value = parseInt(value as string);
-        console.log(value);
         setSelectedYear(value);
         onYearSelected(value);
     }

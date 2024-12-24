@@ -13,7 +13,6 @@ export const CourtHourProvider = ({ children }: { children: ReactNode }) => {
 
     const fetchCourtHour = async () => {
         const resp: ICourtsHours = await CourtHourService.getAllCourtsHours();
-        console.log(resp);
         if (!resp) return;
         setCourtHours(resp.courts_hours);
         const years = resp.courts_hours.map((court_hour) => {

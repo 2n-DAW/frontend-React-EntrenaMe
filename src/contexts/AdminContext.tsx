@@ -15,7 +15,6 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
     
     const fetchAdmin = async () => {
         const resp = await UserService.getCurrentUser();
-        console.log(resp);
         if (!resp) return;
         setAdmin(resp);
     };

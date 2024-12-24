@@ -4,7 +4,6 @@ import SportsForm from "../../components/form/SportsForm";
 
 const SportsMain = () => {
     const { sports, sport_selected } = useSportsContext();
-    console.log(sport_selected);
     return (
 
         <div className="flex h-full">

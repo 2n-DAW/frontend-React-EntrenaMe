@@ -18,11 +18,9 @@ const schema = yup.object().shape({
 });
 
 const SportsForm = ({ sport_data }: ISportsFormProps) => {
-    
-    console.log(sport_data?.n_sport);
-    
-    const {createSport, updateSport} = useSportsContext();
-    
+
+    const { createSport, updateSport } = useSportsContext();
+
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: {
             n_sport: "",
@@ -38,8 +36,8 @@ const SportsForm = ({ sport_data }: ISportsFormProps) => {
         });
     }, [sport_data, reset]);
 
-    const onSubmit = handleSubmit((data:ISportsFormFields) => {
-        !sport_data? createSport(data) : updateSport({...sport_data,...data});
+    const onSubmit = handleSubmit((data: ISportsFormFields) => {
+        !sport_data ? createSport(data) : updateSport({ ...sport_data, ...data });
     });
 
     return (

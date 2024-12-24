@@ -37,7 +37,6 @@ const CalendarCourtHour = ({ month, year, data, onClickHour }: ICalendarCourtHou
     const [ids, setIds] = useState<string[]>([]);
 
     useEffect(() => {
-        console.log("datitossss", data);
         const resp = data.map((court_hour) => {
             return `${court_hour.day_number}_${court_hour.id_month}_${court_hour.id_hour}`;
         });

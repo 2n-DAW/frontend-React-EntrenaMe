@@ -7,7 +7,6 @@ const CheckAccess = ({ children }: AccessCheckerProps)=> {
     const { admin } = useContext(AdminContext)!;
     let access = false;
     useEffect(() => {
-        console.log(admin);
         access = (admin.type_user === "admin")
         setHasAccess(access); 
     }, [admin]);
