@@ -5,6 +5,7 @@ import { CourtProvider } from './contexts/CourtContext';
 import Navbar from './components/layout/Navbar';
 const Home = React.lazy(() => import('./pages/Home'));
 const SportsMain = React.lazy(() => import('./pages/sport/SportsMain'));
+const ActivityMain = React.lazy(() => import('./pages/activity/ActivityMain'));
 import CheckAccess from './components/CheckAccess';
 import Header from './components/layout/Header';
 import { AdminProvider } from './contexts/AdminContext';
@@ -32,6 +33,7 @@ function App() {
                           <Route path="/sports" element={<SportsMain />} />
                           <Route path="/courts" element={<SportsMain />} />
                           <Route path="/courts-hours" element={<CourtHourMain />} />
+                          <Route path="/activities" element={<ActivityMain />} />
                           <Route path="*" element={<div>404</div>} />
                         </Routes>
                       </div>
