@@ -24,10 +24,10 @@ function App() {
               <SportsProvider>
                 <CourtProvider>
                   <CourtHourProvider>
-                    <div className="flex">
+                    <div className="flex w-full">
                       <Navbar />
                       <Header />
-                      <div className="flex-grow py-10 mt-5">
+                      <div className="flex-grow py-10 mt-5 ml-40">
                         <Routes>
                           <Route path="/" element={<Home />} />
                           <Route path="/sports" element={<SportsMain />} />
