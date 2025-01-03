@@ -11,6 +11,7 @@ import Header from './components/layout/Header';
 import { AdminProvider } from './contexts/AdminContext';
 import CourtHourMain from './pages/court-hour/CourtHourMain';
 import { CourtHourProvider } from './contexts/CourtHourContext';
+import { ActivitiesProvider } from './contexts/ActivityContext';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
               <SportsProvider>
                 <CourtProvider>
                   <CourtHourProvider>
+                    <ActivitiesProvider>
                     <div className="flex w-full">
                       <Navbar />
                       <Header />
@@ -38,6 +40,7 @@ function App() {
                         </Routes>
                       </div>
                     </div>
+                    </ActivitiesProvider>
                   </CourtHourProvider>
                 </CourtProvider>
               </SportsProvider>

@@ -1,15 +1,16 @@
+import ActivitiesList from "../../components/lists/ActivitiesList";
 import useActivity from "../../hooks/useActivitiy";
 
 
 const ActivityMain = () => {
 
-    // const { activities, setActivities, } = useActivity();
+    const { activities, setActivities, } = useActivity();
 
 
     return (
         <div className="flex h-full">
             <div className="w-2/3 h-full overflow-y-auto ">
-                {/* <SportsList sports={sports} /> */}
+                <ActivitiesList activities={activities} />
             </div>
             <div className="w-1/3 h-full p-4">
                 <div className=" p-4 rounded-lg">

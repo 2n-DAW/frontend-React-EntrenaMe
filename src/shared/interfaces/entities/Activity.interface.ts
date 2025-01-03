@@ -1,3 +1,5 @@
+import { IInstructor } from "./User.interface";
+
 export interface IActivity {
     id_activity: number;
     id_user_instructor: string;
@@ -10,6 +12,7 @@ export interface IActivity {
     spots: number;
     spots_available: number;
     slug_activity: string;
+    instructor?: IInstructor;
 }
 
 export interface IActivities {
