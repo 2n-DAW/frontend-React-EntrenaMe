@@ -1,3 +1,4 @@
+import ActivityForm from "../../components/form/ActivityForm";
 import ActivitiesList from "../../components/lists/ActivitiesList";
 import useActivity from "../../hooks/useActivitiy";
 
@@ -16,6 +17,7 @@ const ActivityMain = () => {
                 <div className=" p-4 rounded-lg">
                     <h2 className="text-2xl font-semibold mb-4">Crear deporte</h2>
                     {/* <SportsForm /> */}
+                    <ActivityForm />
                 </div>
 
                 <div className=" p-4 rounded-lg">

@@ -3,7 +3,7 @@ import { IActivityCardProps } from "../../shared/interfaces/InterfacesComponents
 
 const ActivityCard = ({ data }: IActivityCardProps) => {
     const { deleteActivity, setActivitySelected } = useActivity();
-    const { instructor, img_activity, n_activity, id_sport, id_activity, slug_activity, id_user_instructor, description, week_day, slot_hour, spots, spots_available } = data;
+    const { instructor, img_activity, n_activity, id_sport, id_activity, slug_activity, description, week_day, slot_hour, spots, spots_available } = data;
 
     return (
         <tr className="bg-gray-900 even:bg-gray-50 even:bg-gray-800 border-b border-gray-700 rounded">
