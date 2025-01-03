@@ -7,7 +7,7 @@ import { useCourtHour } from "../../hooks/useCourtHour";
 
 
 const FiltersCourtHour = ({ onMonthSelected, onCourtSelected, onYearSelected }: IFiltersCourtHourProps) => {
-    
+
     const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
     const [selectedCourt, setSelectedCourt] = useState<number | null>(null);
     const [selectedYear, setSelectedYear] = useState<number | null>(null);
@@ -29,7 +29,7 @@ const FiltersCourtHour = ({ onMonthSelected, onCourtSelected, onYearSelected }: 
 
 
     const { courts } = useCourt();
-    const {years} = useCourtHour();
+    const { years } = useCourtHour();
 
     const [options_court, setOptionsCourt] = useState<{ value: number, label: string }[]>([]);
     const [options_year, setOptionsYear] = useState<{ value: number, label: string }[]>([]);
@@ -38,24 +38,24 @@ const FiltersCourtHour = ({ onMonthSelected, onCourtSelected, onYearSelected }: 
         const resp: { value: number, label: string }[] = courts.map((court) => {
             return { value: court.id_court, label: court.n_court };
         });
-        
+
         setOptionsCourt(resp);
 
     }, [courts]);
-    
+
     useEffect(() => {
         if (!years) return;
-    
+
         const years_unique = Array.from(new Set(years.map((year) => year || 2024)));
-    
+
         const resp: { value: number; label: string }[] = years_unique.map((year) => ({
             value: year,
             label: year.toString(),
         }));
-    
+
         setOptionsYear(resp);
     }, [years]);
-    
+
 
 
 
@@ -64,13 +64,13 @@ const FiltersCourtHour = ({ onMonthSelected, onCourtSelected, onYearSelected }: 
         setSelectedMonth(value);
         onMonthSelected(value);
     };
-    
+
     const onChangeCourt = (value: number | string) => {
         value = parseInt(value as string);
         setSelectedCourt(value);
         onCourtSelected(value);
     };
-    
+
     const onChangeYear = (value: number | string) => {
         value = parseInt(value as string);
         setSelectedYear(value);
@@ -79,35 +79,45 @@ const FiltersCourtHour = ({ onMonthSelected, onCourtSelected, onYearSelected }: 
 
     return (
         <>
-            <Select
-                label="Selecciona un mes"
-                id="Meses"
-                options={options_month}
-                data={selectedMonth ?? ""}
-                placeholder="Selecciona un mes"
-                onDataChange={onChangeMonth}
-            />
+            <div className="flex justify-center w-full">
+                <div className="w-1/3 p-2">
+                    <Select
+                        label="Selecciona un mes"
+                        id="Meses"
+                        options={options_month}
+                        data={selectedMonth ?? ""}
+                        placeholder="Selecciona un mes"
+                        onDataChange={onChangeMonth}
+                    />
+                </div>
 
-            <Select
-                label="Selecciona una Pista"
-                id="Pistas"
-                options={options_court}
-                data={selectedCourt ?? ""}
-                placeholder="Selecciona una Pista"
-                onDataChange={onChangeCourt}
-            />
-            
-            <Select
-                label="Selecciona un año"
-                id="Años"
-                options={options_year}
-                data={selectedYear ?? ""}
-                placeholder="Selecciona un año"
-                onDataChange={onChangeYear}
+                <div className="w-1/3  p-2">
+                    <Select
+                        label="Selecciona una Pista"
+                        id="Pistas"
+                        options={options_court}
+                        data={selectedCourt ?? ""}
+                        placeholder="Selecciona una Pista"
+                        onDataChange={onChangeCourt}
+                    />
+                </div>
 
-            />
-            
-            
+                <div className="w-1/3  p-2">
+
+                    <Select
+                        label="Selecciona un año"
+                        id="Años"
+                        options={options_year}
+                        data={selectedYear ?? ""}
+                        placeholder="Selecciona un año"
+                        onDataChange={onChangeYear}
+
+                    />
+                </div>
+            </div>
+
+
+
 
         </>
     );
