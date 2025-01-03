@@ -3,7 +3,7 @@ import { IActivity} from '../shared/interfaces/entities/Activity.interface';
 import { IActivitiesContextProps } from '../shared/interfaces/InterfacesContext/ActivityContext.interface';
 import { ActivityService } from '../services/activity.service';
 
-export const ActivitiesContext = createContext<IActivitiesContextProps | undefined>(undefined);
+export const ActivityContext = createContext<IActivitiesContextProps | undefined>(undefined);
 
 export const ActivitiesProvider = ({ children }: { children: ReactNode }) => {
 
@@ -22,8 +22,8 @@ export const ActivitiesProvider = ({ children }: { children: ReactNode }) => {
 
     
     return (
-        <ActivitiesContext.Provider value={{ activities, setActivities, activity_selected, setActivitySelected }}>
+        <ActivityContext.Provider value={{ activities, setActivities, activity_selected, setActivitySelected }}>
             {children}
-        </ActivitiesContext.Provider>
+        </ActivityContext.Provider>
     );
 };
