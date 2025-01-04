@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import ActivityForm from "../../components/form/ActivityForm";
 import ActivitiesList from "../../components/lists/ActivitiesList";
 import useActivity from "../../hooks/useActivitiy";
@@ -5,7 +6,13 @@ import useActivity from "../../hooks/useActivitiy";
 
 const ActivityMain = () => {
 
-    const { activities, setActivities, } = useActivity();
+    const { activities, activity_selected } = useActivity();
+    
+    useEffect(() => {
+        console.log(activity_selected);
+    }, [activity_selected]);
+
+        
 
 
     return (
@@ -23,7 +30,7 @@ const ActivityMain = () => {
                 <div className=" p-4 rounded-lg">
                     <h2 className="text-2xl font-semibold mb-4">Editar Deporte</h2>
                     {/* {sport_selected ? <SportsForm sport_data={sport_selected}/> : <p>Selecciona un deporte</p>} */}
-
+                    {activity_selected ? <ActivityForm activity_data={activity_selected} /> : <p>Selecciona una actividad</p>}
                 </div>
 
             </div>

@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { get, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import useActivity from "../../hooks/useActivitiy";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
@@ -9,8 +9,6 @@ import SelectForm from "../inputs/SelectForm";
 import { UserService } from "../../services/user.service";
 import { ISelectFormOption } from "../../shared/interfaces/InterfacesComponents/inputs/SelectForm.interface";
 import { useSportsContext } from "../../hooks/useSportsContext";
-
-
 
 const schema = yup.object().shape({
     n_activity: yup
@@ -29,9 +27,7 @@ const schema = yup.object().shape({
         .required("*La hora de la actividad es obligatoria"),
     description: yup
         .string()
-        .required("*La descripción de la actividad es obligatoria")
-        .min(3, "*La descripción debe tener al menos 3 caracteres")
-        .max(100, "*La descripción no puede exceder los 100 caracteres"),
+        .required("*La descripción de la actividad es obligatoria"),
     spots: yup
         .number()
         .required("*Las plazas de la actividad son obligatorias")
@@ -42,83 +38,79 @@ const schema = yup.object().shape({
     id_sport: yup
         .number()
         .required("*El ID del deporte de la actividad es obligatorio"),
-
 });
 
-
-
-
-
 const ActivityForm = ({ activity_data }: IActivitiesFormProps) => {
-
     const { createActivity, updateActivity } = useActivity();
-
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: {
             n_activity: "",
             img_activity: "",
             week_day: "",
+            slot_hour: "",
+            description: "",
+            spots: 0,
+            id_user_instructor: "",
+            id_sport: 1,
         },
         resolver: yupResolver(schema),
     });
 
-
-    useEffect(() => {
-        reset({
-            n_activity: activity_data?.n_activity || "",
-            img_activity: activity_data?.img_activity || "",
-            week_day: activity_data?.week_day || "",
-        });
-    }, [activity_data, reset]);
-
-    const onSubmit = handleSubmit((data: IActivitiesFormFields) => {
-        console.log({ ...activity_data, ...data, spots_available: data.spots });
-        !activity_data ? createActivity({ ...data, spots_available: data.spots }) : updateActivity({ ...activity_data, ...data, spots_available: data.spots });
-    });
-    
-    
-    
-    const[ instructors_data, setInstructors_data] = useState<ISelectFormOption[]>([]);
-    
-    const[ sports_data, setSports_data] = useState<ISelectFormOption[]>([]);
-    
-    const{sports} = useSportsContext();
+    const [instructors_data, setInstructors_data] = useState<ISelectFormOption[]>([]);
+    const [sports_data, setSports_data] = useState<ISelectFormOption[]>([]);
+    const { sports } = useSportsContext();
 
     const getInstructors = async () => {
         const { instructors } = await UserService.getInstructors();
-    
-            const instructors_array = instructors.map((instructor) => {
-                return { value: instructor.instructor.id_user!, label: instructor.username };
-            });
+        const instructors_array = instructors.map((instructor) => ({
+            value: instructor.instructor.id_user!.toString(),
+            label: instructor.username,
+        }));
         setInstructors_data(instructors_array);
     };
-    
-    
-    
-    
-
-
-
 
     useEffect(() => {
         getInstructors();
     }, []);
-    
+
     useEffect(() => {
-        
-        const sports_array = sports.map((sport) => {
-            return { value: sport.id_sport.toString(), label: sport.n_sport };
-        });
+        const sports_array = sports.map((sport) => ({
+            value: sport.id_sport.toString(),
+            label: sport.n_sport,
+        }));
         setSports_data(sports_array);
-        
     }, [sports]);
-    
+
+    useEffect(() => {
+        if (activity_data && instructors_data.length > 0 && sports_data.length > 0) {
+            reset({
+                n_activity: activity_data.n_activity || "",
+                img_activity: activity_data.img_activity || "",
+                week_day: activity_data.week_day || "",
+                slot_hour: activity_data.slot_hour || "",
+                description: activity_data.description || "",
+                spots: activity_data.spots || 0,
+                id_user_instructor: activity_data.id_user_instructor || "",
+                id_sport: activity_data.id_sport || 1,
+            });
+        }
+    }, [activity_data, instructors_data, sports_data, reset]);
+
+    const onSubmit = handleSubmit((data: IActivitiesFormFields) => {
+        
+        
+        const payload = { ...activity_data, ...data, spots_available: data.spots, id_sport: parseInt(data.id_sport as string) };
+        if (!activity_data) {
+            createActivity(payload);
+        } else {
+            updateActivity(payload);
+        }
+    });
 
     return (
         <form onSubmit={onSubmit}>
-        
             <div className="flex flex-col">
-                <div className="grid grid-cols-2 gap-4"> 
+                <div className="grid grid-cols-2 gap-4">
                     <InputForm<IActivitiesFormFields>
                         label="Nombre"
                         name="n_activity"
@@ -171,30 +163,29 @@ const ActivityForm = ({ activity_data }: IActivitiesFormProps) => {
                         error={errors.slot_hour?.message}
                     />
                 </div>
-                
+
                 <div className="flex w-full justify-center gap-4">
                     <div className="w-4/5">
-                            <InputForm<IActivitiesFormFields>
-                                label="Descripcion"
-                                name="description"
-                                type="text"
-                                register={register}
-                                error={errors.description?.message}
-                            />
-                        </div>
-                        <div className="w-1/5">
-                            <InputForm<IActivitiesFormFields>
-                                label="Plazas"
-                                name="spots"
-                                type="number"
-                                register={register}
-                                error={errors.spots?.message}
-                            />
+                        <InputForm<IActivitiesFormFields>
+                            label="Descripcion"
+                            name="description"
+                            type="text"
+                            register={register}
+                            error={errors.description?.message}
+                        />
+                    </div>
+                    <div className="w-1/5">
+                        <InputForm<IActivitiesFormFields>
+                            label="Plazas"
+                            name="spots"
+                            type="number"
+                            register={register}
+                            error={errors.spots?.message}
+                        />
                     </div>
                 </div>
-                
-                <div className="grid grid-cols-2 gap-4">
 
+                <div className="grid grid-cols-2 gap-4">
                     <SelectForm<IActivitiesFormFields>
                         label="Instructor"
                         name="id_user_instructor"
@@ -202,7 +193,7 @@ const ActivityForm = ({ activity_data }: IActivitiesFormProps) => {
                         register={register}
                         error={errors.id_user_instructor?.message}
                     />
-                    
+
                     <SelectForm<IActivitiesFormFields>
                         label="Deporte"
                         name="id_sport"
@@ -212,12 +203,14 @@ const ActivityForm = ({ activity_data }: IActivitiesFormProps) => {
                     />
                 </div>
 
-                <button type="submit" className="mt-4 w-1/2 p-2 rounded bg-button1 hover:bg-button1_hover text-button1_text transition duration-200">
+                <button
+                    type="submit"
+                    className="mt-4 p-2 rounded bg-button1 hover:bg-button1_hover text-button1_text transition duration-200"
+                >
                     {activity_data ? "Actualizar" : "Crear"}
                 </button>
             </div>
         </form>
-        
     );
 };
 

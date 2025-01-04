@@ -9,7 +9,7 @@ export interface IActivitiesFormFields {
     img_activity: string;
     description: string;
     id_user_instructor: string;
-    id_sport: number;
+    id_sport: number | string;
     week_day: string;
     slot_hour: string;
     spots: number;

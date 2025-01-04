@@ -57,7 +57,7 @@ const SportsForm = ({ sport_data }: ISportsFormProps) => {
                 error={errors.img_sport?.message}
             />
 
-            <button type="submit" className = "mt-4 w-1/2 p-2 rounded bg-button1 hover:bg-button1_hover text-button1_text transition duration-200">
+            <button type="submit" className = "mt-4 p-2 rounded bg-button1 hover:bg-button1_hover text-button1_text transition duration-200">
                 {sport_data ? "Actualizar" : "Crear"}
             </button>
         </form>
