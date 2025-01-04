@@ -49,7 +49,7 @@ export default function ActivitiesList({ activities }: IActivities) {
                     </thead>
                     <tbody>
                         {
-                 
+                            
                             activities.map(activity => (
                                 <ActivityCard key={activity.id_activity} data={activity} />
                             ))

@@ -27,3 +27,7 @@ export interface IInstructor extends IUser {
         address: string;
     }
 }
+
+export interface IInstructors {
+    instructors: IInstructor[];
+}
