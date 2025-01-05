@@ -1,5 +1,10 @@
 const Header = () => {
     
+    const logout = () => {
+        localStorage.removeItem('token');
+        window.location.href = '/home';
+    };
+    
     return (
         <header className="w-full fixed top-0 flex justify-between items-center bg-header py-4 text-text1 p-5">
         <h1 className="text-2xl font-bold">EntrenaMe</h1>
@@ -28,11 +33,6 @@ const Header = () => {
                             Dashboard
                         </a>
                     </li>
-                    <li v-if="!isLogged">
-                        <a href="/auth" className="hover:text-text1_hover">
-                            Login/Register
-                        </a>
-                    </li>
                     <li v-if="isLogged">
                         <a href="`/profile/${username}`"
                             className="flex items-center bg-color1 pr-2 hover:bg-color1_hover rounded-full overflow-hidden">
@@ -42,20 +42,12 @@ const Header = () => {
                         </a>
                     </li>
                     <li v-if="isLogged">
-                        <a href="/auth" className="hover:text-text1_hover">
+                        <a className="hover:text-text1_hover" onClick={logout}>
                             Logout
                         </a>
                     </li>
                 </ul>
             </nav>
-
-            {/* <nav v-else className="flex gap-4">
-                <div className="w-20 h-1 bg-skeleton rounded-full animate-pulse"></div>
-                <div className="w-20 h-1 bg-skeleton rounded-full animate-pulse"></div>
-                <div className="w-20 h-1 bg-skeleton rounded-full animate-pulse"></div>
-                <div className="w-20 h-1 bg-skeleton rounded-full animate-pulse"></div>
-                <div className="w-20 h-1 bg-skeleton rounded-full animate-pulse"></div>
-            </nav> */}
         </div>
     </header>
     );
