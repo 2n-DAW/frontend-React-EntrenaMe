@@ -10,7 +10,6 @@ const CourtHourMain = () => {
     const [court, setCourt] = useState<number | null>(null);
     const [year, setYear] = useState(new Date().getFullYear());
     const [changes, setChanges] = useState<Partial<ICourtHour>[]>([]);
-    const [isSyncing, setIsSyncing] = useState(false); // Estado para controlar la sincronización.
 
     const { courts_hours, createCourtHourArray, deleteCourtHourArray } = useCourtHour();
     const [data, setData] = useState<ICourtHour[]>([]);
@@ -21,7 +20,6 @@ const CourtHourMain = () => {
     const onChange = (court_hour: Partial<ICourtHour>[]) => setChanges(court_hour);
 
     const onSaveClick = async () => {
-        setIsSyncing(true); // Indica que la sincronización ha comenzado.
         let court_hour_add: ICourtHourCreate[] = [];
         let court_hour_delete: ICourtHour[] = [];
 
@@ -71,11 +69,10 @@ const CourtHourMain = () => {
         if (court_hour_delete.length > 0) await deleteCourtHourArray(court_hour_delete);
         if (court_hour_add.length > 0) await createCourtHourArray(court_hour_add);
 
-        setIsSyncing(false); // Sincronización completada.
     };
 
     useEffect(() => {
-        if (isSyncing || !courts_hours) return; // No recalcular mientras se está sincronizando.
+        if (!courts_hours) return; 
         const filteredData = courts_hours.filter((court_hour) => {
             return (
                 court_hour.id_month === month &&
@@ -84,11 +81,10 @@ const CourtHourMain = () => {
             );
         });
 
-        // Evitar actualizaciones innecesarias si los datos no cambian.
         if (JSON.stringify(filteredData) !== JSON.stringify(data)) {
             setData(filteredData);
         }
-    }, [courts_hours, month, year, court, isSyncing]);
+    }, [courts_hours, month, year, court]);
 
     useEffect(() => {
         console.log('data', data);

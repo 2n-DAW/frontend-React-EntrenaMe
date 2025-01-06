@@ -33,7 +33,6 @@ function App() {
                         <Routes>
                           <Route path="/" element={<Home />} />
                           <Route path="/sports" element={<SportsMain />} />
-                          <Route path="/courts" element={<SportsMain />} />
                           <Route path="/courts-hours" element={<CourtHourMain />} />
                           <Route path="/activities" element={<ActivityMain />} />
                           <Route path="*" element={<div>404</div>} />

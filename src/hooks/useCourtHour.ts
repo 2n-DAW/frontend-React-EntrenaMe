@@ -40,10 +40,13 @@ export const useCourtHour = () => {
     const deleteCourtHourArray = useCallback(async (court_data: Partial<ICourtHour>[]) => {
         const resp = await CourtHourService.deleteCourtHourArray(court_data);
         if (!resp) return;
-        setCourtHours(courts_hours?.filter((court_hour) => resp.courts_hours.find((item) => item.id_court_hour !== court_hour.id_court_hour)));
-    
+        setCourtHours(
+            courts_hours?.filter((court_hour) => 
+                !resp.courts_hours.some((item) => item.id_court_hour === court_hour.id_court_hour)
+            )
+        );
     }, [setCourtHours, courts_hours]);
-
+    
     
     
     return {...context, createCourtHour, deleteCourtHour, createCourtHourArray, deleteCourtHourArray};
