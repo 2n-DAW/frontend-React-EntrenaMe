@@ -15,7 +15,7 @@ const schema = yup.object().shape({
         .string()
         .required("*El nombre de la actividad es obligatorio")
         .min(3, "*El nombre debe tener al menos 3 caracteres")
-        .max(15, "*El nombre no puede exceder los 15 caracteres"),
+        .max(100, "*El nombre no puede exceder los 100 caracteres"),
     img_activity: yup
         .string()
         .required("*La imagen de la actividad es obligatoria"),
