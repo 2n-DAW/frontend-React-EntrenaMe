@@ -1,9 +1,14 @@
+import { useEffect, useState } from "react";
+import { useAdmin } from "../../hooks/useAdmin";
+
 const Header = () => {
     
     const logout = () => {
         localStorage.removeItem('token');
         window.location.href = '/home';
     };
+    
+    const {admin} = useAdmin();
     
     return (
         <header className="w-full fixed top-0 flex justify-between items-center bg-header py-4 text-text1 p-5">
@@ -36,9 +41,9 @@ const Header = () => {
                     <li v-if="isLogged">
                         <a href="`/profile/${username}`"
                             className="flex items-center bg-color1 pr-2 hover:bg-color1_hover rounded-full overflow-hidden">
-                            <img src="`../public/img/users/${img_user}`" alt="user image"
+                            <img src={`../public/img/users/${admin.img_user}`} alt="user image"
                                 className="user-image mr-1 w-7 h-7 rounded-full"/>
-                            <span className="text-sm text-white"> username</span>
+                            <span className="text-sm text-white">{admin.username}</span>
                         </a>
                     </li>
                     <li v-if="isLogged">
