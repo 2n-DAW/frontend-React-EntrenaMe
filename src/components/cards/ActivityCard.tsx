@@ -42,7 +42,7 @@ const ActivityCard = ({ data }: IActivityCardProps) => {
                     className="font-medium text-color1 hover:underline mr-4"
                     onClick={() => data && setActivitySelected(data)}
                 >
-                    Editar
+                    Seleccionar
                 </a>
                 <a className="font-medium text-color1   hover:underline"
                     onClick={() => id_activity && deleteActivity(id_activity)}

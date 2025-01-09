@@ -34,19 +34,6 @@ const Navbar = () => {
                         <span className="inline-block w-full">Deportes</span>
                     </NavLink>
                     
-                    <NavLink 
-                        to="/courts" 
-                        className={({ isActive }) => 
-                            `block w-full py-2 px-4 rounded transition-colors duration-200 overflow-hidden whitespace-nowrap text-left
-                                ${isActive 
-                                    ? "bg-gray-700 text-white" 
-                                    : "text-gray-300 hover:bg-gray-700 hover:text-white"
-                            }`
-                        }
-                    >
-                        <span className="inline-block w-full">Pistas</span>
-                    </NavLink>
-                    
                     
                     <NavLink 
                         to="/courts-hours" 

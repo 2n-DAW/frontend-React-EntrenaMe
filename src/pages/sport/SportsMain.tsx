@@ -17,7 +17,7 @@ const SportsMain = () => {
                 </div>
                 
                 <div className="p-4 rounded-lg">
-                    <h2 className="text-2xl font-semibold mb-4">Editar Deporte</h2>
+                    <h2 className="text-2xl font-semibold mb-4">Visualizar Deporte</h2>
                     {sport_selected ? <SportsForm sport_data={sport_selected}/> : <p>Selecciona un deporte</p>}
                     
                 </div>

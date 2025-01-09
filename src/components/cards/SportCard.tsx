@@ -25,7 +25,7 @@ const SportCard = ({ data }: ISportCardProps) => {
                     className="font-medium text-color1 hover:underline mr-4"
                     onClick={() => data && setSportSelected(data)}
                 >
-                    Editar
+                    Seleccionar
                 </a>
                 <a className="font-medium text-color1   hover:underline"
                     onClick={() => id_sport && deleteSport(id_sport)}
