@@ -1,19 +1,44 @@
-import { Sport } from "../../shared/interfaces/Sport.interface";
+import { ISportCardProps } from "../../shared/interfaces/InterfacesComponents/cards/SportCard.interface";
+import { useSportsContext } from "../../hooks/useSportsContext";
 
-const SportCard = ( props : {data:Sport}) => {
-    
-    const { img_sport, n_sport } = props.data as Sport;
+const SportCard = ({ data }: ISportCardProps) => {
+    const { deleteSport, setSportSelected } = useSportsContext();
+    const { img_sport, n_sport, id_sport, slug_sport } = data;
 
     return (
-        <div className="relative group">
-            <img src={`img/sports/${img_sport}`} alt="Ejemplo 1" className="w-full h-auto rounded-lg shadow-lg" />
-            <div
-                className="absolute inset-0 bg-gray-900 bg-opacity-70 flex flex-col justify-center items-center text-center opacity-0 group-hover:opacity-100 transition duration-300 rounded-lg">
-                <h3 className="text-xl font-bold text-white">{n_sport}</h3>
-                <p className="text-gray-300 mt-2">{n_sport}</p>
-            </div>
-        </div>
+        <tr className="bg-gray-900 even:bg-gray-50 even:bg-gray-800 border-b border-gray-700 rounded">
+            <th scope="row" className="px-6 py-4 font-medium text-text1 whitespace-nowrap">
+                {id_sport}
+            </th>
+            <td className="px-6 py-4">
+                {n_sport}
+            </td>
+            <td className="px-6 py-4">
+                {img_sport}
+            </td>
+            <td className="px-6 py-4">
+                {slug_sport}
+            </td>
+            <td className="px-6 py-4">
+
+                <a
+                    className="font-medium text-color1 hover:underline mr-4"
+                    onClick={() => data && setSportSelected(data)}
+                >
+                    Seleccionar
+                </a>
+                <a className="font-medium text-color1   hover:underline"
+                    onClick={() => id_sport && deleteSport(id_sport)}
+                >
+                    Eliminar
+                </a>
+
+            </td>
+        </tr>
     );
 }
 
 export default SportCard;
+
+
+
