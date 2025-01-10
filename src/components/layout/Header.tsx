@@ -33,20 +33,20 @@ const Header = () => {
                             Reservas
                         </a>
                     </li>
-                    <li v-if="type_user === 'admin'">
+                    <li>
                         <a href="/dashboard" className="hover:text-text1_hover">
                             Dashboard
                         </a>
                     </li>
-                    <li v-if="isLogged">
-                        <a href="`/profile/${username}`"
+                    <li>
+                        <a href={`/profile/${admin.username}`}
                             className="flex items-center bg-color1 pr-2 hover:bg-color1_hover rounded-full overflow-hidden">
                             <img src={`../public/img/users/${admin.img_user}`} alt="user image"
                                 className="user-image mr-1 w-7 h-7 rounded-full"/>
                             <span className="text-sm text-white">{admin.username}</span>
                         </a>
                     </li>
-                    <li v-if="isLogged">
+                    <li>
                         <a className="hover:text-text1_hover" onClick={logout}>
                             Logout
                         </a>
