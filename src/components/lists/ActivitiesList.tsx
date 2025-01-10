@@ -16,13 +16,7 @@ export default function ActivitiesList({ activities }: IActivities) {
                                 ID
                             </th>
                             <th scope="col" className="px-1 py-3">
-                                Imagen 
-                            </th>
-                            <th scope="col" className="px-1 py-3">
                                 Plazas 
-                            </th>
-                            <th scope="col" className="px-1 py-3">
-                                Slug 
                             </th>
                             <th scope="col" className="px-1 py-3">
                                 ID Instructor
@@ -32,9 +26,6 @@ export default function ActivitiesList({ activities }: IActivities) {
                             </th>
                             <th scope="col" className="px-1 py-3">
                                 Nombre
-                            </th>
-                            <th scope="col" className="px-1 py-3">
-                                Desctipcion
                             </th>
                             <th scope="col" className="px-1 py-3">
                                 Horario

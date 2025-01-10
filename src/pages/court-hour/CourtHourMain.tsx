@@ -5,6 +5,12 @@ import { useCourtHour } from '../../hooks/useCourtHour';
 import { ICourtHour } from '../../shared/interfaces/entities/CourtHourt.interface';
 import { ICourtHourCreate } from '../../shared/interfaces/InterfacesServices/courtHourService.interface';
 
+
+import Noty from 'noty';
+import 'noty/lib/noty.css';
+import 'noty/lib/themes/mint.css';
+
+
 const CourtHourMain = () => {
     const [month, setMonth] = useState(new Date().getMonth());
     const [court, setCourt] = useState<number | null>(null);
@@ -68,6 +74,13 @@ const CourtHourMain = () => {
 
         if (court_hour_delete.length > 0) await deleteCourtHourArray(court_hour_delete);
         if (court_hour_add.length > 0) await createCourtHourArray(court_hour_add);
+        
+        new Noty({
+            type: 'success',
+            text: 'Guardado',
+            timeout: 1000,
+            progressBar: true,
+        }).show();
 
     };
 

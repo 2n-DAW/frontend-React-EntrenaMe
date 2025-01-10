@@ -22,12 +22,12 @@ const SportCard = ({ data }: ISportCardProps) => {
             <td className="px-6 py-4">
 
                 <a
-                    className="font-medium text-color1 hover:underline mr-4"
+                    className="font-medium text-color1 hover:underline mr-4 hover:cursor-pointer"
                     onClick={() => data && setSportSelected(data)}
                 >
                     Seleccionar
                 </a>
-                <a className="font-medium text-color1   hover:underline"
+                <a className="font-medium text-color1   hover:underline hover:cursor-pointer"
                     onClick={() => id_sport && deleteSport(id_sport)}
                 >
                     Eliminar

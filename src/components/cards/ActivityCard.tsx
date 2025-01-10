@@ -11,13 +11,7 @@ const ActivityCard = ({ data }: IActivityCardProps) => {
                 {id_activity}
             </th>
             <td className="px-1 py-2">
-                {img_activity}
-            </td>
-            <td className="px-1 py-2">
                 {`${spots_available}/${spots}`}
-            </td>
-            <td className="px-1 py-2">
-                {slug_activity}
             </td>
             <td className="px-1 py-2">
                 {instructor?.username}
@@ -29,9 +23,6 @@ const ActivityCard = ({ data }: IActivityCardProps) => {
                 {n_activity}
             </td>
             <td className="px-1 py-2">
-                {description}
-            </td>
-            <td className="px-1 py-2">
                 {slot_hour}
             </td>
             <td className="px-1 py-2">
@@ -39,12 +30,12 @@ const ActivityCard = ({ data }: IActivityCardProps) => {
             </td>
             <td className="px-1 py-2">
                 <a
-                    className="font-medium text-color1 hover:underline mr-4"
+                    className="font-medium text-color1 hover:underline mr-4 hover:cursor-pointer"
                     onClick={() => data && setActivitySelected(data)}
                 >
                     Seleccionar
                 </a>
-                <a className="font-medium text-color1   hover:underline"
+                <a className="font-medium text-color1  hover:underline hover:cursor-pointer"
                     onClick={() => id_activity && deleteActivity(id_activity)}
                 >
                     Eliminar
