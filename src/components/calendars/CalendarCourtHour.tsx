@@ -97,7 +97,7 @@ const CalendarCourtHour = ({ month, year, data, changes }: ICalendarCourtHourPro
                             className="border border-gray-600 text-center"
                         >
                             <h3
-                                className="text-left text-xl text-color1 pl-4 cursor-pointer"
+                                className="text-left text-xl text-color1 pl-4 cursor-pointer hover:underline"
                                 onClick={() => onDayClick(day as number)}
                             >
                                 {day}
